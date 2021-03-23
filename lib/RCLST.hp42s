@@ -1,0 +1,28 @@
+# RCLST: Recall stack
+#
+# The "STOST" and "RCLST" programs store and recall the stack registers X, Y, Z,
+# T and L to/from variables "ST_X", "ST_Y", "ST_Z", "ST_T" and "ST_L". The stack
+# stays unchanged after "STOST". The variables are deleted after execution of
+# "RCLST", so it can only be run once after "STOST".
+#
+# Michael Grubmüller, michael.grubmueller@gmail.com
+# 2021-03-11: Initial version
+# 2021-03-17: Added L (last X)
+
+00 { 71-Byte Prgm }
+01 LBL "RCLST"
+
+02 RCL "ST_L"
+03 STO STO ST L
+04 RCL "ST_T"
+05 RCL "ST_Z"
+06 RCL "ST_Y"
+07 RCL "ST_X"
+
+08 CLV "ST_L"
+09 CLV "ST_T"
+10 CLV "ST_Z"
+11 CLV "ST_Y"
+12 CLV "ST_X"
+
+13 END

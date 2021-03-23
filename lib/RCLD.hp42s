@@ -1,0 +1,47 @@
+# STOD: Store display settings
+#
+# The "STOD" and "RCLD" programs store and recall the display settigns to/from
+# "D_CUSTOM", "D_FMT", "D_DGT" and "D_POLAR".  The variables are deleted after
+# execution of "RCLD", so it can only be run once after "STOD".
+#
+# Michael Grubmüller, michael.grubmueller@gmail.com
+# 2021-03-11: Initial version
+# 2021-03-18: Added custom menu state and complex format
+
+00 { 103-Byte Prgm }
+01 LBL "RCLD"
+
+# Custom menu
+02 RCL "D_CUST"
+03 X≠0?
+04 SF 27
+
+# Display
+05 RCL "D_FMT"
+06 0
+07 X=Y?
+08 SCI IND "D_DGT"
+09 CLX
+10 1
+11 X=Y?
+12 ENG IND "D_DGT"
+13 CLX
+14 2
+15 X=Y?
+16 FIX IND "D_DGT"
+17 CLX
+18 3
+19 X=Y?
+20 ALL
+
+# Complex format
+21 RCL "D_POL"
+22 X≠0?
+23 POLAR
+
+24 CLV "D_CUST"
+25 CLV "D_FMT"
+26 CLV "D_DGT"
+27 CLV "D_POL"
+
+28 END

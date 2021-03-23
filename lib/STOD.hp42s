@@ -1,0 +1,62 @@
+# STOD: Store display settings
+#
+# The "STOD" and "RCLD" programs store and recall the display settigns to/from
+# "D_CUSTOM", "D_FMT", "D_DGT" and "D_POLAR".  The variables are deleted after
+# execution of "RCLD", so it can only be run once after "STOD".
+#
+# Michael Grubmüller, michael.grubmueller@gmail.com
+# 2021-03-11: Initial version
+# 2021-03-18: Added custom menu state and complex format
+
+00 { 125-Byte Prgm }
+01 LBL "STOD"
+
+# Custom menu on
+02 0
+03 FS? 27
+04 1
+05 STO "D_CUST"
+
+# Format
+# 0: SCI
+# 1: ENG
+# 2: FIX
+# 3: ALL
+06 0
+07 STO "D_FMT"
+08 CLX
+09 FS? 40
+10 2
+11 STO+ "D_FMT"
+12 CLX
+13 FS? 41
+14 1
+15 STO+ "D_FMT"
+
+# Number of digits
+16 0
+17 STO "D_DGT"
+18 CLX
+19 FS? 36
+20 8
+21 STO+ "D_DGT"
+22 CLX
+23 FS? 37
+24 4
+25 STO+ "D_DGT"
+26 CLX
+27 FS? 38
+28 2
+29 STO+ "D_DGT"
+30 CLX
+31 FS? 39
+32 1
+33 STO+ "D_DGT"
+
+# Complex format
+34 0
+35 FS? 73
+36 1
+37 STO "D_POL"
+
+38 END
