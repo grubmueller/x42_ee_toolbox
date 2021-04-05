@@ -1,15 +1,16 @@
-# R||R: Parallel resistance of 2 resistors
-# (Solver function)
-#
-# Parallel resistance of two resistors (may of course also be used to calculate
-# parallel inductance or series capacitance).
-# R = 1/(1/R1+1/R2)
-# - R: Parallel resistance in Ohm
-# - R1: Resistor 1 in Ohm
-# - R2: Resistor 2 in Ohm
-#
-# Michael Grubmüller, michael.grubmueller@gmail.com
-# 2021-03-04: Initial version
+@ R||R: Parallel resistance of 2 resistors
+@ (Solver function)
+@
+@ Parallel resistance of two resistors (may of course also be used to calculate
+@ parallel inductance or series capacitance).
+@ R = 1/(1/R1+1/R2)
+@ - R: Parallel resistance in Ohm
+@ - R1: Resistor 1 in Ohm
+@ - R2: Resistor 2 in Ohm
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2021-03-04: Initial version
+@ 2021-04-05: Changed comments from "#" to "@"
 
 00 { 35-Byte Prgm }
 01 LBL ".R||R"

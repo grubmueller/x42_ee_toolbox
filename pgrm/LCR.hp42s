@@ -12,7 +12,7 @@
 @
 @ Michael Grubmüller, michael.grubmueller@gmail.com
 @ 2021-03-27: Initial version
-@ 2021-04-05: Changed comments from "x" to "@"; menu labels
+@ 2021-04-05: Changed comments from "#" to "@"; menu labels
 
 00 { 680-Byte Prgm }
 01 LBL "LCR"

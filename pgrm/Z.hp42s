@@ -18,7 +18,7 @@
 @
 @ Michael Grubmüller, michael.grubmueller@gmail.com
 @ 2021-03-24: Initial version
-@ 2021-04-05: Changed comments from "@" to "@"
+@ 2021-04-05: Changed comments from "#" to "@"
 
 00 { 194-Byte Prgm }
 01 LBL "Z"

@@ -1,16 +1,17 @@
-# VREG: Voltage regulator calculation
-# (Solver function)
-#
-# Output voltage adjustment of linear regulators (like the LM317).
-# Vout = Vref*(1+R2/R1)+Iadj*R2
-# - Vout: Output voltage in V
-# - R1: Top resistance in Ohm
-# - R2: Bottom resistance in Ohm
-# - Vref: Reference voltage in V
-# - Iadj: Adjust pin current in A
-#
-# Michael Grubmüller, michael.grubmueller@gmail.com
-# 2021-03-04: Initial version
+@ VREG: Voltage regulator calculation
+@ (Solver function)
+@
+@ Output voltage adjustment of linear regulators (like the LM317).
+@ Vout = Vref*(1+R2/R1)+Iadj*R2
+@ - Vout: Output voltage in V
+@ - R1: Top resistance in Ohm
+@ - R2: Bottom resistance in Ohm
+@ - Vref: Reference voltage in V
+@ - Iadj: Adjust pin current in A
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2021-03-04: Initial version
+@ 2021-04-05: Changed comments from "#" to "@"
 
 00 { 69-Byte Prgm }
 01 LBL ".VREG"

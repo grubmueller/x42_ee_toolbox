@@ -1,13 +1,14 @@
-# RCLST: Recall stack
-#
-# The "STOST" and "RCLST" programs store and recall the stack registers X, Y, Z,
-# T and L to/from variables "ST_X", "ST_Y", "ST_Z", "ST_T" and "ST_L". The stack
-# stays unchanged after "STOST". The variables are deleted after execution of
-# "RCLST", so it can only be run once after "STOST".
-#
-# Michael Grubmüller, michael.grubmueller@gmail.com
-# 2021-03-11: Initial version
-# 2021-03-17: Added L (last X)
+@ RCLST: Recall stack
+@
+@ The "STOST" and "RCLST" programs store and recall the stack registers X, Y, Z,
+@ T and L to/from variables "ST_X", "ST_Y", "ST_Z", "ST_T" and "ST_L". The stack
+@ stays unchanged after "STOST". The variables are deleted after execution of
+@ "RCLST", so it can only be run once after "STOST".
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2021-03-11: Initial version
+@ 2021-03-17: Added L (last X)
+@ 2021-04-05: Changed comments from "#" to "@"
 
 00 { 71-Byte Prgm }
 01 LBL "RCLST"

@@ -1,22 +1,23 @@
-# STOD: Store display settings
-#
-# The "STOD" and "RCLD" programs store and recall the display settigns to/from
-# "D_CUSTOM", "D_FMT", "D_DGT" and "D_POLAR".  The variables are deleted after
-# execution of "RCLD", so it can only be run once after "STOD".
-#
-# Michael Grubmüller, michael.grubmueller@gmail.com
-# 2021-03-11: Initial version
-# 2021-03-18: Added custom menu state and complex format
+@ STOD: Store display settings
+@
+@ The "STOD" and "RCLD" programs store and recall the display settigns to/from
+@ "D_CUSTOM", "D_FMT", "D_DGT" and "D_POLAR".  The variables are deleted after
+@ execution of "RCLD", so it can only be run once after "STOD".
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2021-03-11: Initial version
+@ 2021-03-18: Added custom menu state and complex format
+@ 2021-04-05: Changed comments from "#" to "@"
 
 00 { 103-Byte Prgm }
 01 LBL "RCLD"
 
-# Custom menu
+@ Custom menu
 02 RCL "D_CUST"
 03 X≠0?
 04 SF 27
 
-# Display
+@ Display
 05 RCL "D_FMT"
 06 0
 07 X=Y?
@@ -34,7 +35,7 @@
 19 X=Y?
 20 ALL
 
-# Complex format
+@ Complex format
 21 RCL "D_POL"
 22 X≠0?
 23 POLAR

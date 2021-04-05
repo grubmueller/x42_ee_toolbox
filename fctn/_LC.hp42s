@@ -1,14 +1,15 @@
-# LC: LC resonant circuit
-# (Solver function)
-#
-# Resonant frequency of an LC resonant circuit.
-# f0 = 1/(2*pi*sqrt(L*C))
-# - f0: Resonant frequency in Hz
-# - L: Inductance in H
-# - C: Capacitance in F
-#
-# Michael Grubmüller, michael.grubmueller@gmail.com
-# 2021-03-15: Initial version
+@ LC: LC resonant circuit
+@ (Solver function)
+@
+@ Resonant frequency of an LC resonant circuit.
+@ f0 = 1/(2*pi*sqrt(L*C))
+@ - f0: Resonant frequency in Hz
+@ - L: Inductance in H
+@ - C: Capacitance in F
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2021-03-15: Initial version
+@ 2021-04-05: Changed comments from "#" to "@"
 
 00 { 35-Byte Prgm }
 01 LBL ".LC"

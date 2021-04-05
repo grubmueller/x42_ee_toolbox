@@ -23,6 +23,6 @@ The following listings only give a short program description. More detailed docu
 - `_RC`: Passive RC low pass filter cut-off frequency
 - `_RPARR`: Parallel resistance of 2 resistors
 - `_VREG`: Voltage regulator calculation
-### lib - libraray
+### lib - library
 - `STOD`, `RCLD`: Store/recall display settings
 - `STOST`, `RCLST`: Store/recall stack

@@ -1,15 +1,16 @@
-# ESER: E-series for electrical components
-#
-# Program prints out E-series values. Input for E-series (3, 6, 12, 24,...) must
-# be entered into X stack before [EXEQ]. Results are shown in 2 line alpha
-# strings as a group of 6 values. Press [UP] or [DOWN] to scroll through the
-# results, or [EXIT] to end the program.
-# Requires programs "STOD", "RCLD", "STOST" and "RCLST".
-# For calculation of E series see Wikipedia article:
-# https://en.wikipedia.org/wiki/E_series_of_preferred_numbers
-#
-# Michael Grubmüller, michael.grubmueller@gmail.com
-# 2021-03-11: Initial version
+@ ESER: E-series for electrical components
+@
+@ Program prints out E-series values. Input for E-series (3, 6, 12, 24,...) must
+@ be entered into X stack before [EXEQ]. Results are shown in 2 line alpha
+@ strings as a group of 6 values. Press [UP] or [DOWN] to scroll through the
+@ results, or [EXIT] to end the program.
+@ Requires programs "STOD", "RCLD", "STOST" and "RCLST".
+@ For calculation of E series see Wikipedia article:
+@ https://en.wikipedia.org/wiki/E_series_of_preferred_numbers
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2021-03-11: Initial version
+@ 2021-04-05: Changed comments from "#" to "@"
 
 00 { 323-Byte Prgm }
 01 LBL "ESER"
@@ -27,7 +28,7 @@
 11 X>Y?
 12 FIX 02 @ 2 digits rounding from E48 on
 
-# Lopp init
+@ Lopp init
 13 RCL 00
 14 1
 15 -
@@ -38,10 +39,10 @@
 20 STO 01 @ Counter from 0 to E series - 1
 21 INDEX "ESER"
 
-# Loop body
+@ Loop body
 22 LBL 01
 
-# Standard formula R = 10**(i/E), i = 0...E-1
+@ Standard formula R = 10**(i/E), i = 0...E-1
 23 10
 24 RCL 01 @ Counter
 25 IP
@@ -50,7 +51,7 @@
 28 Y↑X
 29 RND
 
-# Wrong roundings in E series
+@ Wrong roundings in E series
 30 2.6
 31 X<>Y @ Keep calculated value in X stack for further comparison
 32 X=Y?
@@ -94,11 +95,11 @@
 62 STOEL @ Save to solution vector
 63 I+ @ Increment solution vector row pointer
 
-# Loop control
+@ Loop control
 64 ISG 01
 65 GTO 01
 
-# Display result
+@ Display result
 66 INDEX "ESER"
 67 CLMENU
 68 KEY 7 XEQ A @ [UP]
@@ -113,8 +114,8 @@
 
 77 RTN
 
-# ------------------------------------------------------------------------------
-# [UP] Decrement solution pointer
+@ ------------------------------------------------------------------------------
+@ [UP] Decrement solution pointer
 78 LBL A
 
 79 I-
@@ -126,8 +127,8 @@
 
 85 RTN
 
-# ------------------------------------------------------------------------------
-# [DOWN] Increment solution pointer
+@ ------------------------------------------------------------------------------
+@ [DOWN] Increment solution pointer
 86 LBL B
 
 87 I+
@@ -139,11 +140,11 @@
 
 93 RTN
 
-# ------------------------------------------------------------------------------
-# Write result to alpha register
+@ ------------------------------------------------------------------------------
+@ Write result to alpha register
 94 LBL C
 
-# Line 1
+@ Line 1
 95 CLA
 96 "  "
 97 RCLIJ
@@ -162,7 +163,7 @@
 110 ⊢" "
 111 ARCL ST X
 
-# Line 2
+@ Line 2
 112 ⊢"␊  "
 113 I+ @ Value 4
 114 RCLEL
@@ -176,7 +177,7 @@
 122 ⊢" "
 123 ARCL ST X
 
-# Set back row pointer
+@ Set back row pointer
 124 I-
 125 I-
 126 I-
@@ -185,8 +186,8 @@
 
 129 RTN
 
-# ------------------------------------------------------------------------------
-# End of program
+@ ------------------------------------------------------------------------------
+@ End of program
 130 LBL e
 
 131 CLV "ESER"
