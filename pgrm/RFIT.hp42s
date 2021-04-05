@@ -1,25 +1,27 @@
-# RFIT: Find two standard resistors to get (close to) a desired non-standard 
-# resistance value
-#
-# Calculates a list of resistor combinations to get a desired resistance.
-# After starting the program the main menu appears with the following keys:
-# [R?] Input desired resitance (confirm input with [R/S]), initial value is 
-# taken from X stack at program start
-# [E12] Input/change E series to use (confirm input with [R/S])
-# [R], [R+R], [R||R] Toggle considered circuit configurations: single resistor,
-# series connection of two resistors, parallel connection of two resistors
-# [RUN] Starts calculation
-# After the calculation the program shows the results. You cann scroll through
-# the results with [UP] and [DOWN]. [EXIT] brings you back to the main menu.
-# Requires programs "STOD", "RCLD", "STOST" and "RCLST".
-#
-# Michael Grubmüller, michael.grubmueller@gmail.com
-# 2021-03-14: Initial version
+@ RFIT: Find two standard resistors to get (close to) a desired non-standard
+@ resistance value
+@
+@ Calculates a list of resistor combinations to get a desired resistance.
+@ After starting the program the main menu appears with the following keys:
+@ [R?] Input desired resitance (confirm input with [R/S]), initial value is
+@ taken from X stack at program start
+@ [E12] Input/change E series to use (confirm input with [R/S])
+@ [R], [R+R], [R||R] Toggle considered circuit configurations: single resistor,
+@ series connection of two resistors, parallel connection of two resistors
+@ [RUN] Starts calculation
+@ After the calculation the program shows the results. You cann scroll through
+@ the results with [UP] and [DOWN]. [EXIT] brings you back to the main menu.
+@ Requires programs "STOD", "RCLD", "STOST" and "RCLST".
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2021-03-14: Initial version
+@ 2021-03-24: Minor changes to look better on DM42, cosmetic bugfixes
+@ 2021-04-05: Changed comments from "#" to "@"
 
-00 { 813-Byte Prgm }
+00 { 895-Byte Prgm }
 01 LBL "RFIT"
 
-# Init and stack input
+@ Init and stack input
 02 STO "R"
 03 XEQ "STOST" @ Save stack content
 04 XEQ "STOD" @ Save display setting
@@ -27,7 +29,7 @@
 06 STO "E"
 07 CLST
 
-# Menu
+@ Menu
 08 LBL 00
 09 CLMENU
 10 "R?"
@@ -61,42 +63,42 @@
 37 STOP
 38 GTO 00
 
-# Input resistor
+@ Input resistor
 39 LBL 01
 40 INPUT "R"
 41 RTN
 
-# Input E series
+@ Input E series
 42 LBL 02
 43 INPUT "E"
 44 RTN
 
-# Invert flag for single resistor solution
+@ Invert flag for single resistor solution
 45 LBL 03
 46 FS?C 81
 47 RTN
 48 SF 81
 49 RTN
 
-# Invert flag for series resistor solution
+@ Invert flag for series resistor solution
 50 LBL 04
 51 FS?C 82
 52 RTN
 53 SF 82
 54 RTN
 
-# Invert flag for
+@ Invert flag for
 55 LBL 05
 56 FS?C 83
 57 RTN
 58 SF 83
 59 RTN
 
-# ------------------------------------------------------------------------------
-# Main program
+@ ------------------------------------------------------------------------------
+@ Main program
 60 LBL A
 
-# Settings
+@ Settings
 61 1
 62 STO 01 @ Initial multiplicator (0.1, 1, 10,... -> Start at 0.1 Ohm,...)
 63 6
@@ -104,7 +106,7 @@
 65 10
 66 STO 03 @ Number of results
 
-# Initialise variables
+@ Initialise variables
 67 0
 68 STO 05 @ Circuit, 0:single, 1:series, 2:parallel
 69 STO 06 @ R1
@@ -118,7 +120,7 @@
 76 STO 10 @ Counter 0
 77 STO 11 @ Counter 1
 
-# Create solution matrix
+@ Create solution matrix
 78 RCL 03
 79 5
 80 DIM "RFIT" @ Result matrix (Circuit, R1, R2, R, rel. error in %)
@@ -127,14 +129,14 @@
 83 RCL 19
 84 STO+ "RFIT"
 
-# E series vector
+@ E series vector
 85 RCL "E"
 86 1
 87 DIM "ESERIES" @ E series x 1 vector
 88 INDEX "ESERIES"
 89 XEQ B
 
-# Pool of available resistors
+@ Pool of available resistors
 90 RCL "E"
 91 RCL 02 @ Number of decades
 92 ×
@@ -142,7 +144,7 @@
 94 DIM "RPOOL"
 95 INDEX "RPOOL"
 
-# Loop init: Pool of available resistors
+@ Loop init: Pool of available resistors
 96 RCL 02 @ Number of decades
 97 1
 98 - @ -1, since counter starts at 0
@@ -152,7 +154,7 @@
 102 +
 103 STO 10 @ Counter 0
 
-# Loop body: Pool of available resistors
+@ Loop body: Pool of available resistors
 104 LBL 10
 
 105 RCL 10 @ Counter 0
@@ -170,11 +172,11 @@
 116 10
 117 STO× 01 @ New multiplier
 
-# Loop control: Pool of available resistors
+@ Loop control: Pool of available resistors
 118 ISG 10 @ Counter 0
 119 GTO 10
 
-# Loop init: Outer loop for R1
+@ Loop init: Outer loop for R1
 120 RCL "E"
 121 RCL 02 @ Number of decades
 122 ×
@@ -186,10 +188,10 @@
 128 + @ Start with 1
 129 STO 10 @ Counter 0
 
-# Loop body: Outer loop for R1
+@ Loop body: Outer loop for R1
 130 LBL 11
 
-# - Take R1 out of pool
+@ - Take R1 out of pool
 131 INDEX "RPOOL"
 132 RCL 10 @ Counter 0
 133 IP
@@ -198,7 +200,7 @@
 136 RCLEL
 137 STO 06 @ R1
 
-# - Single resistor
+@ - Single resistor
 138 FC? 81 @ Single resistor solution?
 139 GTO 12 @ Skip single resistor solution
 140 0
@@ -216,10 +218,10 @@
 152 X>Y? @ Write result to solution matrix
 153 XEQ C
 
-# - Entry point for skipping single resistor solution
+@ - Entry point for skipping single resistor solution
 154 LBL 12
 
-# Loop init: Inner loop for R2
+@ Loop init: Inner loop for R2
 155 RCL "E"
 156 RCL 02 @ Number of decades
 157 ×
@@ -232,10 +234,10 @@
 164 + @ Start at R2 = R1
 165 STO 11 @ Counter 1
 
-# Loop body: Inner loop for R2
+@ Loop body: Inner loop for R2
 166 LBL 13
 
-# - Take R2 out of pool
+@ - Take R2 out of pool
 167 INDEX "RPOOL"
 168 RCL 11 @ Counter 1
 169 IP
@@ -244,7 +246,7 @@
 172 RCLEL
 173 STO 07 @ R2, R1 stays defined by outer loop
 
-# - Series connection
+@ - Series connection
 174 FC? 82 @ Series connection?
 175 GTO 14 @ Skip series connection solution
 176 1
@@ -264,7 +266,7 @@
 190 XEQ C
 191 LBL 14 @ Skipped series connection
 
-# - Parallel connection
+@ - Parallel connection
 192 FC? 83 @ Parallel Connection?
 193 GTO 15 @ Skip parallel connection solution
 194 2
@@ -287,21 +289,21 @@
 211 XEQ C
 212 LBL 15 @ Skipped parallel connection
 
-# Loop control: Inner loop for R2
+@ Loop control: Inner loop for R2
 213 ISG 11 @ Counter 1
 214 GTO 13
 
-# Loop control: Outer loop for R1
+@ Loop control: Outer loop for R1
 215 ISG 10 @ Counter 0
 216 GTO 11
 
-# Show result
+@ Show result
 217 XEQ D
 
 218 RTN
 
-# ------------------------------------------------------------------------------
-# Calculation of E series
+@ ------------------------------------------------------------------------------
+@ Calculation of E series
 219 LBL B
 
 220 FIX 01 @ 1 digit rounding up to E24
@@ -310,7 +312,7 @@
 223 X>Y?
 224 FIX 02 @ 2 digits rounding from E48 on
 
-# Lopp init
+@ Lopp init
 225 RCL "E"
 226 1
 227 -
@@ -320,10 +322,10 @@
 231 +
 232 STO 10 @ Counter 0 from 0 to E series - 1
 
-# Loop body
+@ Loop body
 233 LBL 21
 
-# Standard formula R = 10**(i/E), i = 0...E-1
+@ Standard formula R = 10**(i/E), i = 0...E-1
 234 10
 235 RCL 10 @ Counter 0
 236 IP
@@ -332,7 +334,7 @@
 239 Y↑X
 240 RND
 
-# Wrong roundings in E series
+@ Wrong roundings in E series
 241 2.6
 242 X<>Y @ Keep calculated value in X stack for further comparison
 243 X=Y?
@@ -376,19 +378,19 @@
 273 STOEL @ Save to solution vector
 274 I+ @ Increment solution vector row pointer
 
-# Loop control
+@ Loop control
 275 ISG 10 @ Counter 0
 276 GTO 21
 
 277 RTN
 
-# ------------------------------------------------------------------------------
-# Write new result into result matrix
+@ ------------------------------------------------------------------------------
+@ Write new result into result matrix
 278 LBL C
 
 279 INDEX "RFIT"
 
-# Replace last line with current result
+@ Replace last line with current result
 280 RCL 03 @ Number of results
 281 1
 282 STOIJ
@@ -407,7 +409,7 @@
 295 RCL 09 @ Rel. error
 296 STOEL
 
-# Get the current result to the right place
+@ Get the current result to the right place
 297 LBL 30
 298 RCLIJ
 299 R↓
@@ -431,7 +433,7 @@
 317 R<>R
 318 GTO 30
 
-# Result sorted in, save error of new last element to register
+@ Result sorted in, save error of new last element to register
 319 LBL 31
 320 RCL 03 @ Number of results
 321 5
@@ -441,106 +443,110 @@
 
 325 RTN
 
-# ------------------------------------------------------------------------------
-# Show result
+@ ------------------------------------------------------------------------------
+@ Show result
 326 LBL D
 
 327 INDEX "RFIT"
 
 328 CLMENU
-329 KEY 7 XEQ 41 @ [UP]
-330 KEY 8 XEQ 42 @ [DOWN]
-331 KEY 9 GTO 43 @ [EXIT]
-332 MENU
-333 LBL 40
-334 XEQ 44
-335 CLST
-336 PROMPT
-337 GTO 40
+329 "BACK"
+330 KEY 6 GTO 43 @ Same as [EXIT], but looks good on DM42
+331 KEY 7 XEQ 41 @ [UP]
+332 KEY 8 XEQ 42 @ [DOWN]
+333 KEY 9 GTO 43 @ [EXIT]
+334 MENU
+335 LBL 40
+336 XEQ 44
+337 CLST
+338 PROMPT
+339 GTO 40
 
-338 LBL 43
-339 RTN
+340 LBL 43
+341 RTN
 
-# ------------------------------------------------------------------------------
-# Show result: [UP] Decrement solution pointer
-340 LBL 41
-341 I-
-342 RCLIJ
-343 CLX
-344 1
-345 STOIJ
-346 RTN
+@ ------------------------------------------------------------------------------
+@ Show result: [UP] Decrement solution pointer
+342 LBL 41
+343 I-
+344 RCLIJ
+345 CLX
+346 1
+347 STOIJ
+348 RTN
 
-# ------------------------------------------------------------------------------
-# Show result: [DOWN] Increment solution pointer
-347 LBL 42
-348 I+
-349 RCLIJ
-350 CLX
-351 1
-352 STOIJ
-353 RTN
+@ ------------------------------------------------------------------------------
+@ Show result: [DOWN] Increment solution pointer
+349 LBL 42
+350 I+
+351 RCLIJ
+352 CLX
+353 1
+354 STOIJ
+355 RTN
 
-# ------------------------------------------------------------------------------
-# Show result: Write result to alpha register
-354 LBL 44
+@ ------------------------------------------------------------------------------
+@ Show result: Write result to alpha register
+356 LBL 44
 
-355 CLA
+357 CLA
 
-# Line 1
-356 RCLIJ
-357 R↓
-358 AIP
-359 ⊢": "
-360 J+ @ 2: R1
-361 RCLEL
-362 ENG 02
-363 ARCL ST X
-364 J- @ 1: Circuit
-365 RCLEL
-366 1
-367 X=Y?
-368 ⊢" + "
-369 CLX
-370 2
-371 X=Y?
-372 ⊢" || "
-373 J+ @ 2: R1
-374 J+ @ 3: R2
-375 RCLEL
-376 X≠0?
-377 ARCL ST X
+@ Line 1
+358 RCLIJ
+359 R↓
+360 AIP
+361 ⊢": "
+362 J+ @ 2: R1
+363 RCLEL
+364 ENG 02
+365 ARCL ST X
+366 J- @ 1: Circuit
+367 RCLEL
+368 1
+369 X=Y?
+370 ⊢" + "
+371 CLX
+372 2
+373 X=Y?
+374 ⊢" || "
+375 J+ @ 2: R1
+376 J+ @ 3: R2
+377 RCLEL
+378 X≠0?
+379 ARCL ST X
 
-# Line 2
-378 ⊢"␊"
-379 J+ @ 4: R
-380 RCLEL
-381 ENG 05
-382 ARCL ST X
-383 J+ @ 5: Rel. error
-384 RCLEL
-385 FIX 03
-386 ⊢" ("
-387 ARCL ST X
-388 ⊢"%)"
+@ Line 2
+380 ⊢"␊"
+381 J+ @ 4: R
+382 RCLEL
+383 ENG 05
+384 ARCL ST X
+385 J+ @ 5: Rel. error
+386 RCLEL
+387 FIX 03
+388 ⊢" ("
+389 ARCL ST X
+390 ⊢"%)"
 
-389 RCLIJ
-390 CLX
-391 1
-392 STOIJ
+391 RCLIJ
+392 CLX
+393 1
+394 STOIJ
 
-393 RTN
+395 RTN
 
-# ------------------------------------------------------------------------------
-# End of program
-394 LBL e
+@ ------------------------------------------------------------------------------
+@ End of program
+396 LBL e
 
-395 CLV "E"
-396 CLV "ESERIES"
-397 CLV "RPOOL"
-398 CLV "RFIT"
+397 CLV "E"
+398 CLV "ESERIES"
+399 CLV "RPOOL"
+400 CLV "RFIT"
 
-399 XEQ "RCLD" @ Save display setting
-400 XEQ "RCLST" @ Save stack content
+401 EXITALL
 
-401 END
+402 XEQ "RCLD" @ Save display setting
+403 XEQ "RCLST" @ Save stack content
+
+404 END

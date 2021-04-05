@@ -1,0 +1,359 @@
+@ LCR: Resonant circuit design
+@
+@ Step through menus with [UP] and [DOWN] arrows, or exit with [EXIT].
+@ For variable input INPUT ist used, so confirm with [R/S].
+@ Menu page 1: Calculate f0 and Q out of L, C and R; parallel or series circuit
+@ may be choosen; for f0, R input is not required
+@ Menu page 2: Calculate L and C for desired f0 an Q; parallel or series circuit
+@ may be choosen
+@ Menu page 3: Calculate f0, Q or B out of the other 2
+@ Menu page 4: Show common formulas
+@ Requires programs "STOD", "RCLD", "STOST" and "RCLST".
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2021-03-27: Initial version
+@ 2021-04-05: Changed comments from "x" to "@"; menu labels
+
+00 { 680-Byte Prgm }
+01 LBL "LCR"
+
+02 XEQ "STOST"
+03 XEQ "STOD"
+
+@ Menu page 1
+04 LBL a
+05 CLMENU
+06 "L"
+07 KEY 1 XEQ 01
+08 "C"
+09 KEY 2 XEQ 02
+10 "R"
+11 KEY 3 XEQ 03
+12 FS? 85
+13 "[SER]"
+14 FC? 85
+15 "[PAR]"
+16 KEY 4 XEQ 07
+17 "→f0"
+18 KEY 5 XEQ A
+19 "→Q"
+20 KEY 6 XEQ B
+21 KEY 7 GTO d @ [UP]
+22 KEY 8 GTO b @ [DOWN]
+23 KEY 9 GTO e @ [EXIT]
+
+24 MENU
+25 "Resonance"
+26 PROMPT
+27 GTO a
+
+@ Menu page 2
+28 LBL b
+29 CLMENU
+30 "f0"
+31 KEY 1 XEQ 04
+32 "Q"
+33 KEY 2 XEQ 05
+34 "R"
+35 KEY 3 XEQ 03
+36 FS? 85
+37 "[SER]"
+38 FC? 85
+39 "[PAR]"
+40 KEY 4 XEQ 07
+41 "→L"
+42 KEY 5 XEQ C
+43 "→C"
+44 KEY 6 XEQ D
+45 KEY 7 GTO a @ [UP]
+46 KEY 8 GTO c @ [DOWN]
+47 KEY 9 GTO e @ [EXIT]
+
+48 MENU
+49 "Components"
+50 PROMPT
+51 GTO b
+
+@ Menu page 3
+52 LBL c
+53 CLMENU
+54 "f0"
+55 KEY 1 XEQ 04
+56 "Q"
+57 KEY 2 XEQ 05
+58 "B"
+59 KEY 3 XEQ 06
+60 "→f0"
+61 KEY 4 XEQ E
+62 "→Q"
+63 KEY 5 XEQ F
+64 "→B"
+65 KEY 6 XEQ G
+66 KEY 7 GTO b @ [UP]
+67 KEY 8 GTO d @ [DOWN]
+68 KEY 9 GTO e @ [EXIT]
+
+69 MENU
+70 "Bandwidth"
+71 PROMPT
+72 GTO c
+
+@ Menu page 4
+73 LBL d
+74 CLMENU
+75 FS? 85
+76 "[SER]"
+77 FC? 85
+78 "[PAR]"
+79 KEY 1 XEQ 07
+80 "f0"
+81 KEY 2 XEQ H
+82 "Q"
+83 KEY 3 XEQ I
+84 "B"
+85 KEY 4 XEQ J
+86 KEY 7 GTO c @ [UP]
+87 KEY 8 GTO a @ [DOWN]
+88 KEY 9 GTO e @ [EXIT]
+
+89 MENU
+90 "Formulas"
+91 PROMPT
+92 GTO d
+
+@ Input L
+93 LBL 01
+94 INPUT "L"
+95 RTN
+
+@ Input C
+96 LBL 02
+97 INPUT "C"
+98 RTN
+
+@ Input R
+99 LBL 03
+100 INPUT "R"
+101 RTN
+
+@ Input f0
+102 LBL 04
+103 INPUT "f0"
+104 RTN
+
+@ Input Q
+105 LBL 05
+106 INPUT "Q"
+107 RTN
+
+@ Input B
+108 LBL 06
+109 INPUT "B"
+110 RTN
+
+@ Invert flag for series/parallel circuit configuration
+111 LBL 07
+112 FS?C 85
+113 RTN
+114 SF 85
+115 RTN
+
+@ ------------------------------------------------------------------------------
+@ Calculate resontant frequency f0
+116 LBL A
+
+117 RCL "L"
+118 RCL "C"
+119 ×
+120 SQRT
+121 2
+122 PI
+123 ×
+124 ×
+125 1/X
+126 STO "f0"
+127 VIEW "f0"
+
+128 RTN
+
+@ ------------------------------------------------------------------------------
+@ Calculate quality factor Q
+129 LBL B
+
+130 FC? 85
+131 GTO 21
+@ Series resonant cirucit
+132 RCL "R"
+133 1/X
+134 RCL "L"
+135 RCL "C"
+136 ÷
+137 SQRT
+138 ×
+139 GTO 22
+
+@ Parallel resonant circuit
+140 LBL 21
+141 RCL "R"
+142 RCL "C"
+143 RCL "L"
+144 ÷
+145 SQRT
+146 ×
+
+@ Store and view
+147 LBL 22
+148 STO "Q"
+149 VIEW "Q"
+
+150 RTN
+
+@ ------------------------------------------------------------------------------
+@ Calculate inductance L
+151 LBL C
+
+152 FC? 85
+153 GTO 31
+@ Series resonant cirucit
+154 RCL "Q"
+155 RCL "R"
+156 ×
+157 2
+158 PI
+159 RCL "f0"
+160 ×
+161 ×
+162 ÷
+163 GTO 32
+
+@ Parallel resonant circuit
+164 LBL 31
+165 RCL "R"
+166 2
+167 PI
+168 RCL "f0"
+169 ×
+170 ×
+171 RCL "Q"
+172 ×
+173 ÷
+
+@ Store and view
+174 LBL 32
+175 STO "L"
+176 VIEW "L"
+
+177 RTN
+
+@ ------------------------------------------------------------------------------
+@ Calculate capacitance C
+178 LBL D
+
+179 FC? 85
+180 GTO 41
+@ Series resonant cirucit
+181 RCL "Q"
+182 RCL "R"
+183 ×
+184 2
+185 PI
+186 RCL "f0"
+187 ×
+188 ×
+189 ×
+190 1/X
+191 GTO 42
+
+@ Parallel resonant circuit
+192 LBL 41
+193 RCL "Q"
+194 2
+195 PI
+196 RCL "f0"
+197 ×
+198 ×
+199 RCL "R"
+200 ×
+201 ÷
+
+@ Store and view
+202 LBL 42
+203 STO "C"
+204 VIEW "C"
+
+205 RTN
+
+@ ------------------------------------------------------------------------------
+@ Calculate resonant frequency f0
+206 LBL E
+
+207 RCL "Q"
+208 RCL "B"
+209 ×
+210 STO "f0"
+211 VIEW "f0"
+
+212 RTN
+
+@ ------------------------------------------------------------------------------
+@ Calculate quality factor Q
+213 LBL F
+
+214 RCL "f0"
+215 RCL "B"
+216 ÷
+217 STO "Q"
+218 VIEW "Q"
+
+219 RTN
+
+@ ------------------------------------------------------------------------------
+@ Calculate bandwidth B
+220 LBL G
+
+221 RCL "f0"
+222 RCL "Q"
+223 ÷
+224 STO "B"
+225 VIEW "B"
+
+226 RTN
+
+@ ------------------------------------------------------------------------------
+@ Show f0 formula
+227 LBL H
+
+228 "f0=1/√(L×C)"
+229 PROMPT
+
+230 RTN
+
+@ ------------------------------------------------------------------------------
+@ Show Q formula
+231 LBL I
+
+232 "Q=1/R×√(L/C)"
+233 FC? 85
+234 "Q=R×√(C/L)"
+235 PROMPT
+
+236 RTN
+
+@ ------------------------------------------------------------------------------
+@ Show B formula
+237 LBL J
+
+238 "B=f0/B"
+239 PROMPT
+
+240 RTN
+
+@ ------------------------------------------------------------------------------
+@ End of program
+241 LBL e
+
+242 EXITALL
+243 XEQ "RCLD"
+244 XEQ "RCLST"
+
+245 END

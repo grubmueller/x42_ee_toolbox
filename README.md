@@ -12,7 +12,9 @@ Files are organized into three folders:
 The following listings only give a short program description. More detailed documentation may be found in the source files itself.
 ### pgrm - programs
 - `ESER`: E-series for electrical components
+- `LCR`: Resonant circuit design
 - `RFIT`: Find two standard resistors to get (close to) a desired non-standard resistance value (*Program tests all possibilities without further intelligence. Fitting 1.234 kOhm with E12 series resistors takes about 15 seconds on a battery powered DM42.*)
+- `Z`: Impedance of inductor or capacitor at given frequency
 - `ZPARZ`: Parallel impedance of two impedances
 ### fctn - functions
 - `_FPBW`: Full power bandwidth of op-amp
