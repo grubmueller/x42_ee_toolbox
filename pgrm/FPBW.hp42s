@@ -1,0 +1,83 @@
+@ FPBW: Full power bandwidth of op-amp
+@
+@ Full power bandwidth of an operational amplifier:
+@ FPBW = SR/(2*pi*Vp)
+@ Program emulates the solver behaviour.
+@ Input/output paramenter:
+@ [SR]: Amplifier slew rate in V/s (or V/us)
+@ [Vp]: Amplifier output voltage (peak) in V
+@ [FPBW]: Full power bandwidth in Hz (or MHz)
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2021-04-11
+
+00 { 158-Byte Prgm }
+01 LBL "FPBW"
+02 MVAR "SR"
+03 MVAR "Vp"
+04 MVAR "FPBW"
+05 VARMENU "FPBW"
+
+06 LBL a
+07 CLA
+08 STOP
+09 ALENG
+10 X=0? @ Variable name is only written to alpha if no data is input
+11 GTO a @ Go back to menu if data was typed in
+12 ASTO ST X @ Otherwise, write variable name of unknown to x stack
+13 STO "UKNOWN"
+
+14 "FPBW"
+15 ASTO ST Y
+16 X=Y?
+17 GTO A
+
+18 "SR"
+19 ASTO ST Y
+20 X=Y?
+21 GTO B
+
+22 "Vp"
+23 ASTO ST Y
+24 X=Y?
+25 GTO C
+
+@ Show and save result
+26 LBL b
+27 STO IND "UKNOWN"
+28 VIEW IND "UKNOWN"
+29 GTO a
+
+@ Full power bandwidth FPBW
+30 LBL A
+31 2
+32 PI
+33 ×
+34 RCL× "Vp"
+35 RCL "SR"
+36 X<>Y
+37 ÷
+38 GTO b
+
+@ Slew rate SR
+39 LBL B
+40 2
+41 PI
+42 ×
+43 RCL× "Vp"
+44 RCL× "FPBW"
+45 GTO b
+
+@ Output voltge Vp
+46 LBL C
+47 RCL "FPBW"
+48 RCL "SR"
+49 ÷
+50 2
+51 ×
+52 PI
+53 ×
+54 1/X
+55 GTO b
+
+56 END

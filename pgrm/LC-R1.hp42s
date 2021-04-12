@@ -1,0 +1,87 @@
+@ LC-R1: LC resonant circuit design
+@
+@ Resonant frequency or component calculation of LC resonant cirucit:
+@ f0 = 1/(2*pi*sqrt(L*C))
+@ Program emulates the solver behaviour.
+@ Input/output parameters:
+@ [L]: Inductance in H
+@ [C]: Capacitance in F
+@ [f0]: Resonant frequency in Hz
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2021-04-11
+
+00 { 148-Byte Prgm }
+01 LBL "LC-R1"
+02 MVAR "L"
+03 MVAR "C"
+04 MVAR "f0"
+05 VARMENU "LC-R1"
+
+06 LBL a
+07 CLA
+08 STOP
+09 ALENG
+10 X=0? @ Variable name is only written to alpha if no data is input
+11 GTO a @ Go back to menu if data was typed in
+12 ASTO ST X @ Otherwise, write variable name of unknown to x stack
+13 STO "UKNOWN"
+
+14 "L"
+15 ASTO ST Y
+16 X=Y?
+17 GTO A
+
+18 "C"
+19 ASTO ST Y
+20 X=Y?
+21 GTO B
+
+22 "f0"
+23 ASTO ST Y
+24 X=Y?
+25 GTO C
+
+@ Show and save result
+26 LBL b
+27 STO IND "UKNOWN"
+28 VIEW IND "UKNOWN"
+29 GTO a
+
+@ Inductor L
+30 LBL A
+31 RCL "f0"
+32 2
+33 ×
+34 PI
+35 ×
+36 X↑2
+37 RCL× "C"
+38 1/X
+39 GTO b
+
+@ Capacitor C
+40 LBL B
+41 RCL "f0"
+42 2
+43 ×
+44 PI
+45 ×
+46 X↑2
+47 RCL× "L"
+48 1/X
+49 GTO b
+
+@ Resonant frequency f0
+50 LBL C
+51 RCL "L"
+52 RCL× "C"
+53 SQRT
+54 2
+55 ×
+56 PI
+57 ×
+58 1/X
+59 GTO b
+
+60 END

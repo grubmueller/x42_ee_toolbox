@@ -1,14 +1,13 @@
-@ Z||Z: Parallel impedanze of two impedances
+@ X||Y: Parallel impedanze of two impedances
 @
 @ Calculates the parallel impedance of two input impedances given in the X and Y
 @ stack.
 @
 @ Michael Grubmüller, michael.grubmueller@gmail.com
-@ 2021-03-11: Initial version
-@ 2021-04-05: Changed comments from "#" to "@"
+@ 2021-04-11
 
 00 { 13-Byte Prgm }
-01 LBL "Z||Z"
+01 LBL "X||Y"
 
 02 1/X
 03 X<>Y

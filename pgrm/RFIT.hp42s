@@ -3,29 +3,28 @@
 @
 @ Calculates a list of resistor combinations to get a desired resistance.
 @ After starting the program the main menu appears with the following keys:
-@ [R?] Input desired resitance (confirm input with [R/S]), initial value is
-@ taken from X stack at program start
-@ [E12] Input/change E series to use (confirm input with [R/S])
-@ [R], [R+R], [R||R] Toggle considered circuit configurations: single resistor,
-@ series connection of two resistors, parallel connection of two resistors
-@ [RUN] Starts calculation
+@ [R?]: Input/change desired resitance (confirm input with [R/S]), initial value
+@ is taken from X stack at program start.
+@ [E12]: Input/change E series to use (confirm input with [R/S]).
+@ [R]: Toggle if single resistor solution should be considered for solution.
+@ [R+R]: Toggle if series resistor solution should be considered.
+@ [R+R]: Toggle if parallel resistor solution should be considered.
+@ [RUN]: Starts calculation
 @ After the calculation the program shows the results. You cann scroll through
 @ the results with [UP] and [DOWN]. [EXIT] brings you back to the main menu.
-@ Requires programs "STOD", "RCLD", "STOST" and "RCLST".
+@ Requires "LIB" programs of repository.
 @
 @ Michael Grubmüller, michael.grubmueller@gmail.com
-@ 2021-03-14: Initial version
-@ 2021-03-24: Minor changes to look better on DM42, cosmetic bugfixes
-@ 2021-04-05: Changed comments from "#" to "@"
+@ 2021-04-05
 
-00 { 895-Byte Prgm }
+00 { 902-Byte Prgm }
 01 LBL "RFIT"
 
 @ Init and stack input
-02 STO "R"
+02 STO "R" @ Take R value from X stack
 03 XEQ "STOST" @ Save stack content
 04 XEQ "STOD" @ Save display setting
-05 12
+05 12 @ Initialize program with E12
 06 STO "E"
 07 CLST
 
@@ -546,7 +545,8 @@
 
 401 EXITALL
 
-402 XEQ "RCLD" @ Save display setting
-403 XEQ "RCLST" @ Save stack content
+402 XEQ "RCLD" @ Recall display setting
+403 XEQ "RCLST" @ Recall stack content
+404 XEQ "CLTMP" @ Clear temporary variables
 
-404 END
+405 END

@@ -1,0 +1,128 @@
+@ LP1: Transfer function of a first order low-pass filter
+@
+@ Complex transfer function of first order low-pass filter:
+@ G = 1/(1+j*(f/fc))
+@ Program emulates the solver behaviour.
+@ Input/output parameter:
+@ [f]: Frequency in Hz
+@ [fc]: Cut-off frequency in Hz
+@ [G]: Complex valued gain; if G is used as an input program works as follows:
+@ - G input is real: f or fc are solved for particuar magnitude of G
+@ - G input is complex: f or fc are solved for particuar argument of G
+@ A further run for G shows the resulting complex value for gain G.
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2021-04-11
+
+00 { 188-Byte Prgm }
+01 LBL "LP1"
+02 MVAR "f"
+03 MVAR "fc"
+04 MVAR "G"
+05 VARMENU "LP1"
+
+06 LBL a
+07 CLA
+08 POLAR
+09 STOP
+10 ALENG
+11 X=0? @ Variable name is only written to alpha if no data is input
+12 GTO a @ Go back to menu if data was typed in
+13 ASTO ST X @ Otherwise, write variable name of unknown to x stack
+14 STO "UKNOWN"
+
+15 "G"
+16 ASTO ST Y
+17 X=Y?
+18 GTO A
+
+19 "f"
+20 ASTO ST Y
+21 X=Y?
+22 GTO B
+
+23 "fc"
+24 ASTO ST Y
+25 X=Y?
+26 GTO C
+
+@ Show and save result
+27 LBL b
+28 POLAR
+29 STO IND "UKNOWN"
+30 VIEW IND "UKNOWN"
+31 GTO a
+
+@ ------------------------------------------------------------------------------
+@ Solve for gain G
+32 LBL A
+33 RECT
+34 1
+35 RCL "f"
+36 RCL "fc"
+37 ÷
+38 COMPLEX
+39 1/X
+40 GTO b
+
+@ ------------------------------------------------------------------------------
+@ Solve for frequency f
+41 LBL B
+42 RCL "G"
+43 CPX?
+44 GTO 20
+
+@ Calculate for particular gain
+@ mag = 1/SQRT(1+(f/fc)^2)
+@ -> f = fc*SQRT(1/mag^2-1)
+45 X↑2
+46 1/X
+47 1
+48 -
+49 SQRT
+50 RCL× "fc"
+51 GTO b
+
+@ Calculate for particular phase
+@ arg = -ATAN(f/fc)
+@ -> f = fc*TAN(-arg)
+52 LBL 20
+53 POLAR
+54 COMPLEX @ puts arg in x stack and abs in y stack
+55 +/-
+56 TAN
+57 RCL× "fc"
+58 GTO b
+
+@ ------------------------------------------------------------------------------
+@ Solve for cut-off frequency fc
+59 LBL C
+60 RCL "G"
+61 CPX?
+62 GTO 30
+
+@ Calculate for particular gain
+@ mag = 1/SQRT(1+(f/fc)^2)
+@ -> fc = f/SQRT(1/mag^2-1)
+63 X↑2
+64 1/X
+65 1
+66 -
+67 SQRT
+68 1/X
+69 RCL× "f"
+70 GTO b
+
+@ Calculate for particular phase
+@ arg = -ATAN(f/fc)
+@ -> fc = f/TAN(-arg)
+71 LBL 30
+72 POLAR
+73 COMPLEX @ puts arg in x stack and abs in y stack
+74 +/-
+75 TAN
+76 1/X
+77 RCL× "f"
+78 GTO b
+
+79 END

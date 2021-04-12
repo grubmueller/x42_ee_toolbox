@@ -1,9 +1,9 @@
-@ PTX: Resistance/temperature relation of Platinum type RTDs
+@ .PTX: Resistance/temperature relation of Platinum type RTDs
 @ (Solver function)
 @
 @ Resistance of Platinum type (e.g. PT100) RTDs (resistance temperature
 @ detectors). Constants and formulas taken from TI Application Report SBAA275:
-@ "A Basic Guide to RTD Measurements", but should meet the IEC-60751 standard
+@ "A Basic Guide to RTD Measurements", but should meet the IEC-60751 standard.
 @ For T < 0 : R = R0 * (1+(A*T)+(B*T**2)+((C*T**3)*(T-100)))
 @ For T >= 0 : R = R0 * (1+(A*T)+(B*T**2))
 @ - A: const 3.9083ᴇ-3 1/°C
@@ -14,8 +14,7 @@
 @ - R: RTD resistance in Ohm
 @
 @ Michael Grubmüller, michael.grubmueller@gmail.com
-@ 2021-03-05: Initial version
-@ 2021-04-05: Changed comments from "#" to "@"
+@ 2021-04-05
 
 00 { 92-Byte Prgm }
 01 LBL ".PTX"

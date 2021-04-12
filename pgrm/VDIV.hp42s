@@ -1,0 +1,98 @@
+@ VDIV: Voltage divider
+@
+@ Simple voltage divider (also works with complex values):
+@ Vout = Vin*R2/(R1+R2)
+@ Program emulates the solver behaviour.
+@ Input/output paramenter:
+@ [Vin]: Input voltage in V
+@ [R1]: Top resistor in Ohm
+@ [R2]: Bottom (output) resistor in Ohm
+@ [Vout]: Output voltage in V
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2021-04-11
+
+00 { 204-Byte Prgm }
+01 LBL "VDIV"
+02 MVAR "Vin"
+03 MVAR "R1"
+04 MVAR "R2"
+05 MVAR "Vout"
+06 VARMENU "VDIV"
+
+07 LBL a
+08 CLA
+09 STOP
+10 ALENG
+11 X=0? @ Variable name is only written to alpha if no data is input
+12 GTO a @ Go back to menu if data was typed in
+13 ASTO ST X @ Otherwise, write variable name of unknown to x stack
+14 STO "UKNOWN"
+
+15 "Vout"
+16 ASTO ST Y
+17 X=Y?
+18 GTO A
+
+19 "Vin"
+20 ASTO ST Y
+21 X=Y?
+22 GTO B
+
+23 "R1"
+24 ASTO ST Y
+25 X=Y?
+26 GTO C
+
+27 "R2"
+28 ASTO ST Y
+29 X=Y?
+30 GTO D
+
+@ Show and save result
+31 LBL b
+32 STO IND "UKNOWN"
+33 VIEW IND "UKNOWN"
+34 GTO a
+
+@ Output voltage Vout
+35 LBL A
+36 RCL "R2"
+37 ENTER
+38 RCL+ "R1"
+39 ÷
+40 RCL× "Vin"
+41 GTO b
+
+@ Input voltage Vin
+42 LBL B
+43 RCL "R2"
+44 ENTER
+45 RCL+ "R1"
+46 ÷
+47 1/X
+48 RCL× "Vout"
+49 GTO b
+
+@ Top resistor R1
+50 LBL C
+51 RCL "Vin"
+52 RCL "Vout"
+53 ÷
+54 1
+55 -
+56 RCL× "R2"
+57 GTO b
+
+@ Bottom resistor R2
+58 LBL D
+59 RCL "Vin"
+60 RCL "Vout"
+61 ÷
+62 1
+63 -
+64 1/X
+65 RCL× "R1"
+66 GTO b
+
+67 END

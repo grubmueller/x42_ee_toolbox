@@ -1,0 +1,126 @@
+@ VREG: Voltage regulator calculation
+@
+@ Output voltage adjustment of linear regulators (like the LM317):
+@ Vout = Vref*(1+R2/R1)+Iadj*R2
+@ Program emulates the solver behaviour.
+@ Input/output paramenter:
+@ [R1]: Top resistance in Ohm
+@ [R2]: Bottom resistance in Ohm
+@ [Vref]: Reference voltage in V
+@ [Iadj]: Adjust pin current in A
+@ [Vout]: Output voltage in V
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2021-04-12
+
+00 { 307-Byte Prgm }
+01 LBL "VREG"
+02 MVAR "Vref"
+03 MVAR "R1"
+04 MVAR "R2"
+05 MVAR "Iadj"
+06 MVAR "Vout"
+07 VARMENU "VREG"
+
+08 LBL a
+09 CLA
+10 STOP
+11 ALENG
+12 X=0? @ Variable name is only written to alpha if no data is input
+13 GTO a @ Go back to menu if data was typed in
+14 ASTO ST X @ Otherwise, write variable name of unknown to x stack
+15 STO "UKNOWN"
+
+16 "Vout"
+17 ASTO ST Y
+18 X=Y?
+19 GTO A
+
+20 "Vref"
+21 ASTO ST Y
+22 X=Y?
+23 GTO B
+
+24 "R1"
+25 ASTO ST Y
+26 X=Y?
+27 GTO C
+
+28 "R2"
+29 ASTO ST Y
+30 X=Y?
+31 GTO D
+
+32 "Iadj"
+33 ASTO ST Y
+34 X=Y?
+35 GTO E
+
+@ Show and save result
+36 LBL b
+37 STO IND "UKNOWN"
+38 VIEW IND "UKNOWN"
+39 GTO a
+
+@ Output voltage Vout
+40 LBL A
+41 RCL "R2"
+42 RCL÷ "R1"
+43 1
+44 +
+45 RCL× "Vref"
+46 RCL "Iadj"
+47 RCL× "R2"
+48 +
+49 GTO b
+
+@ Reference voltage Vref
+50 LBL B
+51 RCL "Vout"
+52 RCL "Iadj"
+53 RCL× "R2"
+54 -
+55 RCL "R2"
+56 RCL÷ "R1"
+57 1
+58 +
+59 ÷
+60 GTO b
+
+@ Resistor R1
+61 LBL C
+62 RCL "Vout"
+63 RCL- "Vref"
+64 RCL "Iadj"
+65 RCL× "R2"
+66 -
+67 RCL "Vref"
+68 RCL× "R2"
+69 X<>Y
+70 ÷
+71 GTO b
+
+@ Resistor R2
+72 LBL D
+73 RCL "Vout"
+74 RCL- "Vref"
+75 RCL "Vref"
+76 RCL÷ "R1"
+77 RCL+ "Iadj"
+78 ÷
+79 GTO b
+
+@ Adjust current Iadj
+80 LBL E
+81 RCL "R2"
+82 RCL÷ "R1"
+83 1
+84 +
+85 RCL× "Vref"
+86 RCL "Vout"
+87 X<>Y
+88 -
+89 RCL÷ "R2"
+90 GTO b
+
+91 END
