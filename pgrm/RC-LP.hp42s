@@ -9,73 +9,71 @@
 @ [fc]: Cut-off frequency in Hz
 @
 @ Michael Grubmüller, michael.grubmueller@gmail.com
-@ 2021-04-11
+@ 2021-04-13
 
-00 { 142-Byte Prgm }
+00 { 137-Byte Prgm }
 01 LBL "RC-LP"
 02 MVAR "R"
 03 MVAR "C"
 04 MVAR "fc"
 05 VARMENU "RC-LP"
 
-06 LBL a
-07 CLA
+06 CF 21 @ Do not stop on VIEW
+
+07 LBL a
 08 STOP
-09 ALENG
-10 X=0? @ Variable name is only written to alpha if no data is input
-11 GTO a @ Go back to menu if data was typed in
-12 ASTO ST X @ Otherwise, write variable name of unknown to x stack
-13 STO "UKNOWN"
+09 ASTO ST X @ Write variable name of unknown to X stack
+10 STO "UKNOWN"
 
-14 "fc"
-15 ASTO ST Y
-16 X=Y?
-17 GTO A
+11 "fc"
+12 ASTO ST Y
+13 X=Y?
+14 GTO A
 
-18 "R"
-19 ASTO ST Y
-20 X=Y?
-21 GTO B
+15 "R"
+16 ASTO ST Y
+17 X=Y?
+18 GTO B
 
-22 "C"
-23 ASTO ST Y
-24 X=Y?
-25 GTO C
+19 "C"
+20 ASTO ST Y
+21 X=Y?
+22 GTO C
 
 @ Show and save result
-26 LBL b
-27 STO IND "UKNOWN"
-28 VIEW IND "UKNOWN"
-29 GTO a
+23 LBL b
+24 STO IND "UKNOWN"
+25 VIEW IND "UKNOWN"
+26 GTO a
 
 @ Cut-off frequency fc
-30 LBL A
-31 2
-32 PI
-33 ×
-34 RCL× "R"
-35 RCL× "C"
-36 1/X
-37 GTO b
+27 LBL A
+28 2
+29 PI
+30 ×
+31 RCL× "R"
+32 RCL× "C"
+33 1/X
+34 GTO b
 
 @ Resistor R
-38 LBL B
-39 2
-40 PI
-41 ×
-42 RCL× "fc"
-43 RCL× "C"
-44 1/X
-45 GTO b
+35 LBL B
+36 2
+37 PI
+38 ×
+39 RCL× "fc"
+40 RCL× "C"
+41 1/X
+42 GTO b
 
 @ Capacitor C
-46 LBL C
-47 2
-48 PI
-49 ×
-50 RCL× "fc"
-51 RCL× "R"
-52 1/X
-53 GTO b
+43 LBL C
+44 2
+45 PI
+46 ×
+47 RCL× "fc"
+48 RCL× "R"
+49 1/X
+50 GTO b
 
-54 END
+51 END

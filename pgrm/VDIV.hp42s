@@ -10,9 +10,9 @@
 @ [Vout]: Output voltage in V
 @
 @ Michael Grubmüller, michael.grubmueller@gmail.com
-@ 2021-04-11
+@ 2021-04-13
 
-00 { 204-Byte Prgm }
+00 { 199-Byte Prgm }
 01 LBL "VDIV"
 02 MVAR "Vin"
 03 MVAR "R1"
@@ -20,79 +20,77 @@
 05 MVAR "Vout"
 06 VARMENU "VDIV"
 
-07 LBL a
-08 CLA
+07 CF 21 @ Do not stop on VIEW
+
+08 LBL a
 09 STOP
-10 ALENG
-11 X=0? @ Variable name is only written to alpha if no data is input
-12 GTO a @ Go back to menu if data was typed in
-13 ASTO ST X @ Otherwise, write variable name of unknown to x stack
-14 STO "UKNOWN"
+10 ASTO ST X @ Write variable name of unknown to X stack
+11 STO "UKNOWN"
 
-15 "Vout"
-16 ASTO ST Y
-17 X=Y?
-18 GTO A
+12 "Vout"
+13 ASTO ST Y
+14 X=Y?
+15 GTO A
 
-19 "Vin"
-20 ASTO ST Y
-21 X=Y?
-22 GTO B
+16 "Vin"
+17 ASTO ST Y
+18 X=Y?
+19 GTO B
 
-23 "R1"
-24 ASTO ST Y
-25 X=Y?
-26 GTO C
+20 "R1"
+21 ASTO ST Y
+22 X=Y?
+23 GTO C
 
-27 "R2"
-28 ASTO ST Y
-29 X=Y?
-30 GTO D
+24 "R2"
+25 ASTO ST Y
+26 X=Y?
+27 GTO D
 
 @ Show and save result
-31 LBL b
-32 STO IND "UKNOWN"
-33 VIEW IND "UKNOWN"
-34 GTO a
+28 LBL b
+29 STO IND "UKNOWN"
+30 VIEW IND "UKNOWN"
+31 GTO a
 
 @ Output voltage Vout
-35 LBL A
-36 RCL "R2"
-37 ENTER
-38 RCL+ "R1"
-39 ÷
-40 RCL× "Vin"
-41 GTO b
+32 LBL A
+33 RCL "R2"
+34 ENTER
+35 RCL+ "R1"
+36 ÷
+37 RCL× "Vin"
+38 GTO b
 
 @ Input voltage Vin
-42 LBL B
-43 RCL "R2"
-44 ENTER
-45 RCL+ "R1"
-46 ÷
-47 1/X
-48 RCL× "Vout"
-49 GTO b
+39 LBL B
+40 RCL "R2"
+41 ENTER
+42 RCL+ "R1"
+43 ÷
+44 1/X
+45 RCL× "Vout"
+46 GTO b
 
 @ Top resistor R1
-50 LBL C
-51 RCL "Vin"
-52 RCL "Vout"
-53 ÷
-54 1
-55 -
-56 RCL× "R2"
-57 GTO b
+47 LBL C
+48 RCL "Vin"
+49 RCL "Vout"
+50 ÷
+51 1
+52 -
+53 RCL× "R2"
+54 GTO b
 
 @ Bottom resistor R2
-58 LBL D
-59 RCL "Vin"
-60 RCL "Vout"
-61 ÷
-62 1
-63 -
-64 1/X
-65 RCL× "R1"
-66 GTO b
+55 LBL D
+56 RCL "Vin"
+57 RCL "Vout"
+58 ÷
+59 1
+60 -
+61 1/X
+62 RCL× "R1"
+63 GTO b
 
-67 END
+64 END

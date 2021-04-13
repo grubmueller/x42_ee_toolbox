@@ -9,75 +9,73 @@
 @ [FPBW]: Full power bandwidth in Hz (or MHz)
 @
 @ Michael Grubmüller, michael.grubmueller@gmail.com
-@ 2021-04-11
+@ 2021-04-13
 
-00 { 158-Byte Prgm }
+00 { 153-Byte Prgm }
 01 LBL "FPBW"
 02 MVAR "SR"
 03 MVAR "Vp"
 04 MVAR "FPBW"
 05 VARMENU "FPBW"
 
-06 LBL a
-07 CLA
+06 CF 21 @ Do not stop on VIEW
+
+07 LBL a
 08 STOP
-09 ALENG
-10 X=0? @ Variable name is only written to alpha if no data is input
-11 GTO a @ Go back to menu if data was typed in
-12 ASTO ST X @ Otherwise, write variable name of unknown to x stack
-13 STO "UKNOWN"
+09 ASTO ST X @ Write variable name of unknown to X stack
+10 STO "UKNOWN"
 
-14 "FPBW"
-15 ASTO ST Y
-16 X=Y?
-17 GTO A
+11 "FPBW"
+12 ASTO ST Y
+13 X=Y?
+14 GTO A
 
-18 "SR"
-19 ASTO ST Y
-20 X=Y?
-21 GTO B
+15 "SR"
+16 ASTO ST Y
+17 X=Y?
+18 GTO B
 
-22 "Vp"
-23 ASTO ST Y
-24 X=Y?
-25 GTO C
+19 "Vp"
+20 ASTO ST Y
+21 X=Y?
+22 GTO C
 
 @ Show and save result
-26 LBL b
-27 STO IND "UKNOWN"
-28 VIEW IND "UKNOWN"
-29 GTO a
+23 LBL b
+24 STO IND "UKNOWN"
+25 VIEW IND "UKNOWN"
+26 GTO a
 
 @ Full power bandwidth FPBW
-30 LBL A
-31 2
-32 PI
-33 ×
-34 RCL× "Vp"
-35 RCL "SR"
-36 X<>Y
-37 ÷
-38 GTO b
+27 LBL A
+28 2
+29 PI
+30 ×
+31 RCL× "Vp"
+32 RCL "SR"
+33 X<>Y
+34 ÷
+35 GTO b
 
 @ Slew rate SR
-39 LBL B
-40 2
-41 PI
-42 ×
-43 RCL× "Vp"
-44 RCL× "FPBW"
-45 GTO b
+36 LBL B
+37 2
+38 PI
+39 ×
+40 RCL× "Vp"
+41 RCL× "FPBW"
+42 GTO b
 
 @ Output voltge Vp
-46 LBL C
-47 RCL "FPBW"
-48 RCL "SR"
-49 ÷
-50 2
-51 ×
-52 PI
-53 ×
-54 1/X
-55 GTO b
+43 LBL C
+44 RCL "FPBW"
+45 RCL "SR"
+46 ÷
+47 2
+48 ×
+49 PI
+50 ×
+51 1/X
+52 GTO b
 
-56 END
+53 END
