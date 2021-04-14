@@ -12,6 +12,7 @@ Files are organized into three folders:
 The following listings only give a short program description. More detailed documentation may be found in the source files itself.
 ### pgrm - programs
 - `dB`: Various dB conversions
+- `ESER`: E-series for electrical components
 - `FPBW`: Full power bandwidth of op-amp
 - `LC-R1`: LC resonant circuit design
 - `LC-R2`: LC resonant circuit design (advanced version)
