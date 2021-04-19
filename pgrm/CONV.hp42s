@@ -1,0 +1,556 @@
+@ CONV: Unit conversion
+@
+@ Conversion between different physical units.
+@ Program contains 3 submenus:
+@ [LENG], Length: mil, in, ft, yd, mi, m
+@ [ENGY], Energy: Wh, Ah, eV, kcal, J
+@ [TEMP], Temperature: °C, °F, K
+@ The program is meant to be used during a calculation. It replaces the X stack
+@ value by the result and restores the remaining stack on program end.
+@ Requires "LIB" programs of repository.
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2021-04-19
+
+@ ==============================================================================
+@ MAIN =========================================================================
+00 { 105-Byte Prgm }
+01 LBL "CONV"
+
+02 XEQ "STOST"
+03 XEQ "STOD"
+
+04 LBL b
+05 CLMENU
+06 "LENG"
+07 KEY 1 XEQ "C-LEN"
+08 "ENGY"
+09 KEY 2 XEQ "C-EGY"
+10 "TEMP"
+11 KEY 3 XEQ "C-TMP"
+12 KEY 9 GTO e @ [EXIT]
+13 MENU
+14 XEQ "RCLST"
+15 STOP
+16 GTO b
+
+@ End of program ---------------------------------------------------------------
+17 LBL e
+18 EXITALL
+19 XEQ "RCLD"
+20 XEQ "RCLST"
+21 XEQ "CLTMP"
+22 END
+
+@ ==============================================================================
+@ LENGTH =======================================================================
+00 { 406-Byte Prgm }
+01 LBL "C-LEN"
+
+02 CF 00 @ Flag 00 -> Input mode (0), Output mode (1)
+03 CF 01 @ Flag 01 -> Key 1 unit is input
+04 CF 02 @ Flag 02 -> Key 2 unit is input
+05 CF 03 @ ...
+06 CF 04
+07 CF 05
+08 CF 06
+
+@ Menu
+09 LBL a
+10 CLMENU
+
+11 "→" @ Program is in output mode, key 1 unit may be output
+12 FS?C 01
+13 "■" @ Program is in output mode, key 1 unit is input
+14 FC? 00
+15 CLA @ Clear alpha if program is in input mode
+16 ⊢"mil"
+17 KEY 1 XEQ A
+
+18 "→"
+19 FS?C 02
+20 "■"
+21 FC? 00
+22 CLA
+23 ⊢"in"
+24 KEY 2 XEQ B
+
+25 "→"
+26 FS?C 03
+27 "■"
+28 FC? 00
+29 CLA
+30 ⊢"ft"
+31 KEY 3 XEQ C
+
+32 "→"
+33 FS?C 04
+34 "■"
+35 FC? 00
+36 CLA
+37 ⊢"yd"
+38 KEY 4 XEQ D
+
+39 "→"
+40 FS?C 05
+41 "■"
+42 FC? 00
+43 CLA
+44 ⊢"mi"
+45 KEY 5 XEQ E
+
+46 "→"
+47 FS?C 06
+48 "■"
+49 FC? 00
+50 CLA
+51 ⊢"m"
+52 KEY 6 XEQ F
+
+53 KEY 9 GTO e @ [EXIT]
+
+54 MENU
+55 XEQ "RCLST"
+56 STOP
+57 GTO a @ Input mode
+
+@ mil --------------------------------------------------------------------------
+58 LBL A
+59 FS?C 00 @ Output mode?
+60 GTO 01
+
+@ Input mode
+61 STO "ST_X" @ Save input to temporary stack X variable
+62 0.0254
+63 ×
+64 1ᴇ-3
+65 ×
+66 STO 00 @ Save input in SI unit
+67 SF 01 @ Signal that key 1 unit is input
+68 SF 00 @ Change to output mode
+69 RTN
+
+@ Output mode
+70 LBL 01
+71 RCL 00
+72 0.0254
+73 ÷
+74 1ᴇ-3
+75 ÷
+76 STO "ST_X" @ Save output to temporary stack X variable
+77 RTN
+
+@ inch -------------------------------------------------------------------------
+78 LBL B
+79 FS?C 00
+80 GTO 02
+
+@ Input mode
+81 STO "ST_X"
+82 0.0254
+83 ×
+84 STO 00
+85 SF 02
+86 SF 00
+87 RTN
+
+@ Output mode
+88 LBL 02
+89 RCL 00
+90 0.0254
+91 ÷
+92 STO "ST_X"
+93 RTN
+
+@ ft ---------------------------------------------------------------------------
+94 LBL C
+95 FS?C 00
+96 GTO 03
+
+@ Input mode
+97 STO "ST_X"
+98 0.3048
+99 ×
+100 STO 00
+101 SF 03
+102 SF 00
+103 RTN
+
+@ Output mode
+104 LBL 03
+105 RCL 00
+106 0.3048
+107 ÷
+108 STO "ST_X"
+109 RTN
+
+@ yd ---------------------------------------------------------------------------
+110 LBL D
+111 FS?C 00
+112 GTO 04
+
+@ Input mode
+113 STO "ST_X"
+114 0.9144
+115 ×
+116 STO 00
+117 SF 04
+118 SF 00
+119 RTN
+
+@ Output mode
+120 LBL 04
+121 RCL 00
+122 0.9144
+123 ÷
+124 STO "ST_X"
+125 RTN
+
+@ mi ---------------------------------------------------------------------------
+126 LBL E
+127 FS?C 00
+128 GTO 05
+
+@ Input mode
+129 STO "ST_X"
+130 1609.344
+131 ×
+132 STO 00
+133 SF 05
+134 SF 00
+135 RTN
+
+@ Output mode
+136 LBL 05
+137 RCL 00
+138 1609.344
+139 ÷
+140 STO "ST_X"
+141 RTN
+
+@ m ----------------------------------------------------------------------------
+142 LBL F
+143 FS?C 00
+144 GTO 06
+
+@ Input mode
+145 STO "ST_X"
+146 STO 00
+147 SF 06
+148 SF 00
+149 RTN
+
+@ Output mode
+150 LBL 06
+151 RCL 00
+152 STO "ST_X"
+153 RTN
+
+@ End of program ---------------------------------------------------------------
+154 LBL e
+155 END
+
+@ ==============================================================================
+@ ENERGY =======================================================================
+00 { 351-Byte Prgm }
+01 LBL "C-EGY"
+
+02 CF 00 @ Flag 00 -> Input mode (0), Output mode (1)
+03 CF 01 @ Flag 01 -> Key 1 unit is input
+04 CF 02 @ Flag 02 -> Key 2 unit is input
+05 CF 03 @ ...
+06 CF 04
+07 CF 05
+08 CF 06
+
+@ Menu
+09 LBL a
+10 CLMENU
+
+11 "→" @ Program is in output mode, key 1 unit may be output
+12 FS?C 01
+13 "■" @ Program is in output mode, key 1 unit is input
+14 FC? 00
+15 CLA @ Clear alpha if program is in input mode
+16 ⊢"Wh"
+17 KEY 1 XEQ A
+
+18 "→"
+19 FS?C 02
+20 "■"
+21 FC? 00
+22 CLA
+23 ⊢"Ah"
+24 KEY 2 XEQ B
+
+25 "→"
+26 FS?C 03
+27 "■"
+28 FC? 00
+29 CLA
+30 ⊢"eV"
+31 KEY 3 XEQ C
+
+32 "→"
+33 FS?C 04
+34 "■"
+35 FC? 00
+36 CLA
+37 ⊢"kcal"
+38 KEY 4 XEQ D
+
+39 "→"
+40 FS?C 06
+41 "■"
+42 FC? 00
+43 CLA
+44 ⊢"J"
+45 KEY 6 XEQ F
+
+46 KEY 9 GTO e @ [EXIT]
+
+47 MENU
+48 XEQ "RCLST"
+49 STOP
+50 GTO a @ Input mode
+
+@ Wh ---------------------------------------------------------------------------
+51 LBL A
+52 FS?C 00 @ Output mode?
+53 GTO 01
+
+@ Input mode
+54 STO "ST_X" @ Save input to temporary stack X variable
+55 3600
+56 ×
+57 STO 00 @ Save input in SI unit
+58 SF 01 @ Signal that key 1 unit is input
+59 SF 00 @ Change to output mode
+60 RTN
+
+@ Output mode
+61 LBL 01
+62 RCL 00
+63 3600
+64 ÷
+65 STO "ST_X" @ Save output to temporary stack X variable
+66 RTN
+
+@ inch -------------------------------------------------------------------------
+67 LBL B
+68 FS?C 00
+69 GTO 02
+
+@ Input mode
+70 STO "ST_X"
+71 INPUT "V"
+72 RCL× "ST_X"
+73 3600
+74 ×
+75 STO 00
+76 SF 02
+77 SF 00
+78 RTN
+
+@ Output mode
+79 LBL 02
+80 INPUT "V"
+81 RCL 00
+82 X<>Y
+83 ÷
+84 3600
+85 ÷
+86 STO "ST_X"
+87 RTN
+
+@ eV ---------------------------------------------------------------------------
+88 LBL C
+89 FS?C 00
+90 GTO 03
+
+@ Input mode
+91 STO "ST_X"
+92 1.602176634ᴇ-19
+93 ×
+94 STO 00
+95 SF 03
+96 SF 00
+97 RTN
+
+@ Output mode
+98 LBL 03
+99 RCL 00
+100 1.602176634ᴇ-19
+101 ÷
+102 STO "ST_X"
+103 RTN
+
+@ kcal -------------------------------------------------------------------------
+104 LBL D
+105 FS?C 00
+106 GTO 04
+
+@ Input mode
+107 STO "ST_X"
+108 4184
+109 ×
+110 STO 00
+111 SF 04
+112 SF 00
+113 RTN
+
+@ Output mode
+114 LBL 04
+115 RCL 00
+116 4184
+117 ÷
+118 STO "ST_X"
+119 RTN
+
+@ J ----------------------------------------------------------------------------
+120 LBL F
+121 FS?C 00
+122 GTO 06
+
+@ Input mode
+123 STO "ST_X"
+124 STO 00
+125 SF 06
+126 SF 00
+127 RTN
+
+@ Output mode
+128 LBL 06
+129 RCL 00
+130 STO "ST_X"
+131 RTN
+
+@ End of program ---------------------------------------------------------------
+132 LBL e
+133 END
+
+@ ==============================================================================
+@ TEMPERATURE ==================================================================
+00 { 229-Byte Prgm }
+01 LBL "C-TMP"
+
+02 CF 00 @ Flag 00 -> Input mode (0), Output mode (1)
+03 CF 01 @ Flag 01 -> Key 1 unit is input
+04 CF 02 @ Flag 02 -> Key 2 unit is input
+05 CF 03 @ ...
+06 CF 04
+07 CF 05
+08 CF 06
+
+@ Menu
+09 LBL a
+10 CLMENU
+
+11 "→" @ Program is in output mode, key 1 unit may be output
+12 FS?C 01
+13 "■" @ Program is in output mode, key 1 unit is input
+14 FC? 00
+15 CLA @ Clear alpha if program is in input mode
+16 ⊢"°C"
+17 KEY 1 XEQ A
+
+18 "→"
+19 FS?C 02
+20 "■"
+21 FC? 00
+22 CLA
+23 ⊢"°F"
+24 KEY 2 XEQ B
+
+25 "→"
+26 FS?C 06
+27 "■"
+28 FC? 00
+29 CLA
+30 ⊢"K"
+31 KEY 6 XEQ F
+
+32 KEY 9 GTO e @ [EXIT]
+
+33 MENU
+34 XEQ "RCLST"
+35 STOP
+36 GTO a @ Input mode
+
+@ °C ---------------------------------------------------------------------------
+37 LBL A
+38 FS?C 00 @ Output mode?
+39 GTO 01
+
+@ Input mode
+40 STO "ST_X" @ Save input to temporary stack X variable
+41 273.15
+42 +
+43 STO 00 @ Save input in SI unit
+44 SF 01 @ Signal that key 1 unit is input
+45 SF 00 @ Change to output mode
+46 RTN
+
+@ Output mode
+47 LBL 01
+48 RCL 00
+49 273.15
+50 -
+51 STO "ST_X" @ Save output to temporary stack X variable
+52 RTN
+
+@ °F ---------------------------------------------------------------------------
+53 LBL B
+54 FS?C 00
+55 GTO 02
+
+@ Input mode
+56 STO "ST_X"
+57 32
+58 -
+59 5
+60 9
+61 ÷
+62 ×
+63 273.15
+64 +
+65 STO 00
+66 SF 02
+67 SF 00
+68 RTN
+
+@ Output mode
+69 LBL 02
+70 RCL 00
+71 273.15
+72 -
+73 9
+74 5
+75 ÷
+76 ×
+77 32
+78 +
+79 STO "ST_X"
+80 RTN
+
+@ K ----------------------------------------------------------------------------
+81 LBL F
+82 FS?C 00
+83 GTO 06
+
+@ Input mode
+84 STO "ST_X"
+85 STO 00
+86 SF 06
+87 SF 00
+88 RTN
+
+@ Output mode
+89 LBL 06
+90 RCL 00
+91 STO "ST_X"
+92 RTN
+
+@ End of program ---------------------------------------------------------------
+93 LBL e
+94 END

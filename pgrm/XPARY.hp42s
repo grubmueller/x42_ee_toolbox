@@ -1,4 +1,4 @@
-@ X||Y: Parallel impedanze of two impedances
+@ X||Y: Parallel impedance of two impedances from stack
 @
 @ Calculates the parallel impedance of two input impedances given in the X and Y
 @ stack.

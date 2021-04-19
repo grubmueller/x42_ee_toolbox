@@ -11,6 +11,7 @@ Files are organized into three folders:
 ## Program documentation
 The following listings only give a short program description. More detailed documentation may be found in the source files itself.
 ### pgrm - programs
+- `CONV`: Unit conversion
 - `dB`: Various dB conversions
 - `ESER`: E-series for electrical components
 - `FPBW`: Full power bandwidth of op-amp
@@ -19,14 +20,15 @@ The following listings only give a short program description. More detailed docu
 - `LP1`: Transfer function of a first order low-pass filter
 - `RC-LP`: Passive RC low pass filter design
 - `RFIT`: Find two standard resistors to get (close to) a desired non-standard resistance value (*Program tests all possibilities without further intelligence. Fitting 1.234 kOhm with E12 series resistors takes about 15 seconds on a battery powered DM42.*)
+- `R||R`: Parallel resistance of two resistors
 - `VDIV`: Voltage divider
 - `VREG`: Voltage regulator calculation
-- `X||Y`: Parallel impedanze of two impedances
+- `X||Y`: Parallel impedanze of two impedances from stack
 - `Z`: Impedance of inductor or capacitor at given frequency
 ### fctn - functions
 - `.PTX`: Resistance/temperature relation of Platinum type RTDs
 ### lib - library
-All following programs are in one file `LIB.hp42s` summarized.
+All following programs are summarized in one file `LIB.hp42s`.
 - `STOD`, `RCLD`: Store/recall display settings
 - `STOST`, `RCLST`: Store/recall stack
 - `CLTMP`: Clear temporary variables
