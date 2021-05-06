@@ -1,0 +1,40 @@
+@ .DIODE: Shockley diode model
+@ (Solver function)
+@
+@ Schockly equation to model the I-V curve of a diode.
+@ I = IS*(exp((VD)/(n*VT))-1),
+@ where VT = k*T/e
+@ k:    Boltzmann constant 1.380649ᴇ-23 J/K
+@ T:    Absolute temperature 300 K (room temp.)
+@ e:    Elementary charge 1.602176634ᴇ-19 C
+@ [IS]: Reverse bias saturation current in A
+@ [VD]: Diode voltage in V
+@ [n]:  Quality factor
+@ [I]:  Diode current in A
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2021-04-19
+
+00 { 79-Byte Prgm }
+01 LBL ".DIODE"
+02 MVAR "IS"
+03 MVAR "VD"
+04 MVAR "n"
+05 MVAR "I"
+
+06 1.380649ᴇ-23 @ k
+07 300 @ T
+08 ×
+09 1.602176634ᴇ-19 @ e
+10 ÷
+11 RCL× "n"
+12 RCL "VD"
+13 X<>Y
+14 ÷
+15 E↑X
+16 1
+17 -
+18 RCL× "IS"
+19 RCL- "I"
+
+20 END

@@ -1,11 +1,12 @@
-@ CONV: Unit conversion
+@ CONV: Unit conversions
 @
 @ Conversion between different physical units.
 @ Program contains 3 submenus:
-@ [LENG], Length: mil, in, ft, yd, mi, m
-@ [ENGY], Energy: Wh, Ah, eV, kcal, J
-@ [TEMP], Temperature: °C, °F, K
-@ The program is meant to be used during a calculation. It replaces the X stack
+@ [LENG], Length:       mil, in, ft, yd, mi, m
+@ [ENGY], Energy:       Wh, Ah, eV, kcal, J
+@ [TEMP], Temperature:  °C, °F, K
+@ Input is taken from the X stack, but may be changed by changing stack content.
+@ The program is meant to be used during a calculation; it replaces the X stack
 @ value by the result and restores the remaining stack on program end.
 @ Requires "LIB" programs of repository.
 @

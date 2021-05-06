@@ -1,0 +1,25 @@
+@ .R||R: Parallel resistance of two resistors
+@
+@ R = R1*R2/(R1+R2)
+@ [R1]: Resistor 1
+@ [R2]: Resistor 2
+@ [R]:  Parallel resistance
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2021-05-04
+
+00 { 35-Byte Prgm }
+01 LBL ".R||R"
+02 MVAR "R1"
+03 MVAR "R2"
+04 MVAR "R"
+
+05 RCL "R1"
+06 1/X
+07 RCL "R2"
+08 1/X
+09 +
+10 1/X
+11 RCL- "R"
+
+12 END

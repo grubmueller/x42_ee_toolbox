@@ -1,19 +1,19 @@
-@ LC-R2: LC resonant circuit design (advanced version)
+@ LCR: LCR resonant circuit design
 @
 @ Step through menus with [UP] and [DOWN] arrows, or exit with [EXIT].
 @ For variable input INPUT ist used, so confirm with [R/S].
-@ Menu page 1: Toggle [SER]ies or [PAR]allel resonant circuit;
-@ calculate [→f0] and [→Q] out of [L], [C] and [R];
-@ Menu page 2: Toggle [SER]ies or [PAR]allel resonant circuit;
-@ Calculate [→L] and [→C] for desired [f0] and [Q]
-@ Menu page 3: Calculate [f0], [Q] or [B] out of the other 2
+@ Menu page 1:  Toggle [SER]ies or [PAR]allel resonant circuit;
+@               calculate [→f0] and [→Q] out of [L], [C] and [R].
+@ Menu page 2:  Toggle [SER]ies or [PAR]allel resonant circuit;
+@               calculate [→L] and [→C] for desired [f0] and [Q].
+@ Menu page 3:  Calculate [f0], [Q] or [B] out of the other 2.
 @ Requires "LIB" programs of repository.
 @
 @ Michael Grubmüller, michael.grubmueller@gmail.com
 @ 2021-04-12
 
-00 { 523-Byte Prgm }
-01 LBL "LC-R2"
+00 { 521-Byte Prgm }
+01 LBL "LCR"
 
 02 XEQ "STOST"
 03 XEQ "STOD"

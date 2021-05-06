@@ -6,27 +6,29 @@ All programs are human readable text files with UTF8 encoding, so any editor sho
 ## File organisation
 Files are organized into three folders:
 - `/pgrm`: This folder contains **programs** to be executed with `XEQ`.
-- `/fctn`: Files in this folder are **functions** to be used with the 42 `SOLVER` program. Files are marked with a starting underscore `_` and function labels start with a point `.`.
+- `/fctn`: Files in this folder are **functions** to be used with the 42 `SOLVER` program. Files are marked with a starting underscore `_` and function labels start with a dot `.`.
 - `/lib`: This folder contains programs, that are used from within other programs but may not be quite useful standalone.
 ## Program documentation
 The following listings only give a short program description. More detailed documentation may be found in the source files itself.
 ### pgrm - programs
-- `CONV`: Unit conversion
+- `CONV`: Unit conversions
 - `dB`: Various dB conversions
 - `ESER`: E-series for electrical components
-- `FPBW`: Full power bandwidth of op-amp
-- `LC-R1`: LC resonant circuit design
-- `LC-R2`: LC resonant circuit design (advanced version)
+- `LCR`: LCR resonant circuit design
 - `LP1`: Transfer function of a first order low-pass filter
-- `RC-LP`: Passive RC low pass filter design
+- `QUAD`: Roots of quadratic equation
 - `RFIT`: Find two standard resistors to get (close to) a desired non-standard resistance value (*Program tests all possibilities without further intelligence. Fitting 1.234 kOhm with E12 series resistors takes about 15 seconds on a battery powered DM42.*)
-- `R||R`: Parallel resistance of two resistors
-- `VDIV`: Voltage divider
-- `VREG`: Voltage regulator calculation
 - `X||Y`: Parallel impedanze of two impedances from stack
 - `Z`: Impedance of inductor or capacitor at given frequency
 ### fctn - functions
+- `.DIODE`: Shockley diode model
+- `.FPBW`: Full power bandwidth of op-amp
+- `.LC`: Resonant frequency of an LC resonant cirucit
 - `.PTX`: Resistance/temperature relation of Platinum type RTDs
+- `.RC`: Cut-off frequency of a passive RC lowp ass filter
+- `.R||R`: Parallel resistance of two resistors
+- `.VDIV`: Voltage divider
+- `.VREG`: Voltage regulator
 ### lib - library
 All following programs are summarized in one file `LIB.hp42s`.
 - `STOD`, `RCLD`: Store/recall display settings

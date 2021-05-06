@@ -1,13 +1,14 @@
 @ dB: Various dB conversions
 @
+@ Input is taken from the X stack, but may be changed by changing stack content.
 @ Step through menus with [UP] and [DOWN] arrows, or exit with [EXIT].
-@ Menu page 1: Calculation of 20*log... gain
-@ [G→dB], [dB→G]
-@ Menu page 2: Conversion between linear power and dB, 10*log... 
-@ [W→dB], [W→dBm], [W→dBµ], [dB→W], [dBm→W], [dBµ→W]
-@ Menu page 3: Conversion between voltage and dBm
-@ [50] change the specific impedance, [V→dBm], [dBm→V]
-@ The program is meant to be used during a calculation. It replaces the X stack
+@ Menu page 1:  Calculation of 20*log... gain
+@               [G→dB], [dB→G]
+@ Menu page 2:  Conversion between power in W and dB, 10*log... 
+@               [W→dB], [W→dBm], [W→dBµ], [dB→W], [dBm→W], [dBµ→W]
+@ Menu page 3:  Conversion between voltage and dBm
+@               [50] change the specific impedance, [V→dBm], [dBm→V]
+@ The program is meant to be used during a calculation; it replaces the X stack
 @ value by the result and restores the remaining stack on program end.
 @ Requires "LIB" programs of repository.
 @

@@ -1,0 +1,27 @@
+@ .RC: Cut-off frequency of a passive RC lowp ass filter
+@ (Solver function)
+@
+@ fc = 1/(2*pi*R*C)
+@ [R]:  Resistance in Ohm
+@ [C]:  Capacitance in F
+@ [fc]: Cut-off frequency in Hz
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2021-05-04
+
+00 { 33-Byte Prgm }
+01 LBL ".RC"
+02 MVAR "R"
+03 MVAR "C"
+04 MVAR "fc"
+
+05 RCL "R"
+06 RCL× "C"
+07 PI
+08 ×
+09 2
+10 ×
+11 1/X
+12 RCL- "fc"
+
+13 END

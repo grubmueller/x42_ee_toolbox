@@ -1,0 +1,33 @@
+@ .VREG: Voltage regulator
+@ (Solver function)
+@
+@ Output voltage adjustment of linear regulators (like the LM317).
+@ Vout = Vref*(1+R2/R1)+Iadj*R2
+@ [R1]:     Top resistance in Ohm
+@ [R2]:     Bottom resistance in Ohm
+@ [Vref]:   Reference voltage in V
+@ [Iadj]:   Adjust pin current in A
+@ [Vout]:   Output voltage in V
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2021-05-04
+
+00 { 69-Byte Prgm }
+01 LBL ".VREG"
+02 MVAR "R1"
+03 MVAR "R2"
+04 MVAR "Vref"
+05 MVAR "Iadj"
+06 MVAR "Vout"
+
+07 RCL "R2"
+08 RCL÷ "R1"
+09 1
+10 +
+11 RCL× "Vref"
+12 RCL "Iadj"
+13 RCL× "R2"
+14 +
+15 RCL- "Vout"
+
+16 END
