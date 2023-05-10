@@ -1,0 +1,17 @@
+@ Parallel impedance of two impedances
+@
+@ Calculates the parallel impedance of two input impedances given in the x and
+@ y stack.
+@
+@ Author:
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2023-05-09
+
+00 { 13-Byte Prgm }
+01▸LBL "X||Y"
+02 1/X
+03 X<>Y
+04 1/X
+05 +
+06 1/X
+07 END

@@ -1,0 +1,27 @@
+@ Passive RC low pass filter
+@
+@ Solver program for the cut-off frequency of an RC low pass filter.
+@
+@ fc = 1/(2*pi*R*C)
+@
+@ [fc]: Cut-off frequency in Hz
+@ [R]:  Resistance in Ohm
+@ [C]:  Capacitance in F
+@
+@ Author:
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2022-10-13
+
+00 { 31-Byte Prgm }
+01▸LBL "RC"
+02 MVAR "fc"
+03 MVAR "R"
+04 MVAR "C"
+05 2
+06 PI
+07 ×
+08 RCL× "R"
+09 RCL× "C"
+10 1/X
+11 RCL- "fc"
+12 END

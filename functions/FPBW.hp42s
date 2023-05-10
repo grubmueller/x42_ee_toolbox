@@ -1,0 +1,29 @@
+@ Full-power bandwidth of an op-amp
+@
+@ Solver program for calculating the full-power bandwidth of an operational 
+@ amplifier. The full-power bandwidth is the maximum frequenc where a 
+@ sinusoidal signal can be generated on an op-amp output without distortion.
+@
+@ FPBW = SR/(2*pi*Vp)
+@
+@ [FPBW]:   Full power bandwidth in Hz (or MHz)
+@ [SR]:     Amplifier slew rate in V/s (or V/us)
+@ [Vp]:     Amplifier output voltage (peak) in V
+@
+@ Author:
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2022-10-13
+
+00 { 41-Byte Prgm }
+01▸LBL "FPBW"
+02 MVAR "FPBW"
+03 MVAR "SR"
+04 MVAR "Vp"
+05 2
+06 PI
+07 ×
+08 RCL× "Vp"
+09 1/X
+10 RCL× "SR"
+11 RCL- "FPBW"
+12 END

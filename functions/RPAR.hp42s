@@ -1,0 +1,26 @@
+@ Parallel resistance of two resistors
+@
+@ Solver program for the parallel cirucit of two resistors.
+@
+@ R = R1*R2/(R1+R2)
+@
+@ [R]:  Parallel resistance
+@ [R1]: Resistor 1
+@ [R2]: Resistor 2
+@
+@ Author:
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2022-10-13
+
+00 { 39-Byte Prgm }
+01▸LBL "RPAR"
+02 MVAR "R"
+03 MVAR "R1"
+04 MVAR "R2"
+05 RCL "R1"
+06 RCL× "R2"
+07 RCL "R1"
+08 RCL+ "R2"
+09 ÷
+10 RCL- "R"
+11 END

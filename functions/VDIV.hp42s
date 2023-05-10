@@ -1,27 +1,28 @@
-@ .VDIV: Voltage divider
-@ (Solver function)
+@ Voltage divider
+@
+@ Solver program for the voltage divider.
 @
 @ Vout = Vin*R2/(R1+R2)
+@
+@ [Vout]:   Output voltage in V
 @ [Vin]:    Input voltage in V
 @ [R1]:     Top resistor in Ohm
 @ [R2]:     Bottom (output) resistor in Ohm
-@ [Vout]:   Output voltage in V
 @
+@ Author:
 @ Michael Grubmüller, michael.grubmueller@gmail.com
-@ 2021-05-04
+@ 2022-10-13
 
-00 { 52-Byte Prgm }
-01 LBL ".VDIV"
-02 MVAR "Vin"
-03 MVAR "R1"
-04 MVAR "R2"
-05 MVAR "Vout"
-
+00 { 51-Byte Prgm }
+01▸LBL "VDIV"
+02 MVAR "Vout"
+03 MVAR "Vin"
+04 MVAR "R1"
+05 MVAR "R2"
 06 RCL "Vin"
 07 RCL× "R2"
 08 RCL "R1"
 09 RCL+ "R2"
 10 ÷
 11 RCL- "Vout"
-
 12 END

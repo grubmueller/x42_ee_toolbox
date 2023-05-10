@@ -1,0 +1,26 @@
+@ Reactance of inductor
+@
+@ Solver program for reactance of a incducance.
+@
+@ XL = 2*pi*f*L
+@
+@ [XL]: Reactance in Ohm
+@ [f]:  Frequency in Hz
+@ [L]:  Inductance in H
+@
+@ Author:
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2023-05-09
+
+00 { 30-Byte Prgm }
+01▸LBL "XL"
+02 MVAR "XL"
+03 MVAR "f"
+04 MVAR "L"
+05 2
+06 PI
+07 ×
+08 RCL× "f"
+09 RCL× "L"
+10 RCL- "XL"
+11 END

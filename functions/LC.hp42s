@@ -1,0 +1,29 @@
+@ LC resonant cirucit
+@
+@ Solver program for the resontant frequency of an LC resonant circuit.
+@
+@ f0 = 1/(2*pi*sqrt(L*C))
+@
+@ [f0]: Resonant frequency in Hz
+@ [L]:  Inductance in H
+@ [C]:  Capacitance in F
+@
+@ Author:
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2022-10-13
+
+00 { 33-Byte Prgm }
+01▸LBL "LC"
+02 MVAR "f0"
+03 MVAR "L"
+04 MVAR "C"
+05 RCL "L"
+06 RCL× "C"
+07 SQRT
+08 PI
+09 ×
+10 2
+11 ×
+12 1/X
+13 RCL- "f0"
+14 END

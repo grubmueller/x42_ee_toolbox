@@ -1,0 +1,27 @@
+@ Impedance of capacitance
+@
+@ Calculates the impedance of a capacitance given in the x stack.
+@ The frequency must be stored before with alpha label "f".
+@
+@ Author:
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2023-05-09
+
+00 { 33-Byte Prgm }
+01▸LBL "→ZC"
+02 2
+03 ×
+04 PI
+05 ×
+06 RCL× "f"
+07 0
+08 X<>Y
+09 CF 00    @ Save POLAR mode setting
+10 FS? 73
+11 SF 00
+12 RECT
+13 COMPLEX
+14 FS? 00   @ Restore PLAR mode setting
+15 POLAR
+16 1/X
+17 END

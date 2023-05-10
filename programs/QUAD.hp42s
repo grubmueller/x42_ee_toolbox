@@ -1,22 +1,25 @@
-@ QUAD: Roots of quadratic equation
+@ Quadratic equation
 @
-@ Input is via stack: X=c, Y=b, Z=a.
-@ Results are on X and Y stack after execution.
+@ Solves the quadratic equation ax^2+bx+c=0. Parameters a,b and c must be on z, 
+@ y, x stack. The resulting two roots are returned on x and y stack. Also works
+@ with complex solutions.
 @
-@ An interesting discussion/battle on short versions for solving the quadratic
-@ equation can be found on:
-@ https://www.hpmuseum.org/cgi-sys/cgiwrap/hpmuseum/archv019.cgi?read=173639
-@
+@ Author:
 @ Michael Grubmüller, michael.grubmueller@gmail.com
-@ 2021-05-06
+@ 2022-05-09
+@
+@ Additional links:
+@ - Software library on hpmuseum.org
+@   https://www.hpmuseum.org/software/42squad.htm
+@ - Discussion on possible short implementations of the root finding
+@   https://www.hpmuseum.org/cgi-sys/cgiwrap/hpmuseum/archv019.cgi?read=173639
 
 00 { 40-Byte Prgm }
-01 LBL "QUAD"
-
+01▸LBL "QUAD"
 @ STACK:        @ X             # Y             # Z             # T
-@===============#===============#===============#===============#===============
-@ INPUT:        @ c             # b             # a             # T
-02 RCL× ST Z    @ ac            # b             # a             # T
+@===============#===============#===============#===============#==============
+@ INPUT:        @ c             # b             # a             # 
+02 RCL× ST Z    @ ac            # b             # a             # 
 03 4            @ 4             # ac            # b             # a
 04 ×            @ 4ac           # b             # a             # a
 05 RCL ST Y     @ b             # 4ac           # b             # a
@@ -25,7 +28,7 @@
 08 -            @ b^2-4ac       # b             # a             # a
 09 SQRT         @ SQRT          # b             # a             # a
 10 X<>Y         @ b             # SQRT          # a             # a
-11 ±            @ -b            # SQRT          # a             # a
+11 +/-          @ -b            # SQRT          # a             # a
 12 STO ST Z     @ -b            # SQRT          # -b            # a
 13 X<>Y         @ SQRT          # -b            # -b            # a
 14 STO- ST Y    @ SQRT          # -b-SQRT       # -b            # a
@@ -34,7 +37,6 @@
 17 2            @ 2             # -b-SQRT       # -b+SQRT       # a
 18 RCL× ST T    @ 2a            # -b-SQRT       # -b+SQRT       # a
 19 STO÷ ST Y    @ 2a            # (-b-SQRT)/2a  # -b+SQRT       # a
-20 STO÷ ST Z    @ 2a            # (-b-SQRT)/2a  # (-b+SQRT/2a)  # a
-21 R↓           @ (-b-SQRT/2a)  # (-b+SQRT)/2a  # a             # 2a
-
+20 STO÷ ST Z    @ 2a            # (-b-SQRT)/2a  # (-b+SQRT)/2a  # a
+21 R↓           @ (-b-SQRT)/2a  # (-b+SQRT)/2a  # a             # 2a
 22 END

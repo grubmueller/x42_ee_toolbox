@@ -1,0 +1,34 @@
+@ Voltage regulator
+@
+@ Solver program for output voltage adjustment of linear regulators (like the 
+@ LM317) or dc-dc converters.
+@
+@ Vout = Vref*(1+R2/R1)+Iadj*R2
+@
+@ [Vout]:   Output voltage in V
+@ [R1]:     Top (Adjust to Vout) resistance in Ohm
+@ [R2]:     Bottom (Adjust to GND) resistance in Ohm
+@ [Vref]:   Reference voltage in V
+@ [Iadj]:   Adjust pin current in A
+@
+@ Author:
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2022-10-13
+
+00 { 68-Byte Prgm }
+01▸LBL "VREG"
+02 MVAR "Vout"
+03 MVAR "R1"
+04 MVAR "R2"
+05 MVAR "Vref"
+06 MVAR "Iadj"
+07 RCL "R2"
+08 RCL÷ "R1"
+09 1
+10 +
+11 RCL× "Vref"
+12 RCL "Iadj"
+13 RCL× "R2"
+14 +
+15 RCL- "Vout"
+16 END
