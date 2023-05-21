@@ -1,0 +1,44 @@
+@ Time value of money (solver function)
+@
+@ This function is taken from the the HP-42S Owner's Manual without any 
+@ modifications.
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2023-05-15
+
+00 { 80-Byte Prgm }
+01▸LBL "TVM"
+02 MVAR "N"
+03 MVAR "I%YR"
+04 MVAR "PV"
+05 MVAR "PMT"
+06 MVAR "FV"
+07 1
+08 ENTER
+09 ENTER
+10 RCL "I%YR"
+11 %
+12 12
+13 ÷
+14 STO ST T
+15 FC? 00
+16 CLX
+17 +
+18 R↓
+19 +
+20 RCL "N"
+21 +/-
+22 Y↑X
+23 1
+24 X<>Y
+25 -
+26 LASTX
+27 RCL× "FV"
+28 R↓
+29 X<>Y
+30 ÷
+31 ×
+32 RCL× "PMT"
+33 +
+34 RCL+ "PV"
+35 END

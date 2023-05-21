@@ -8,12 +8,11 @@
 @ [R]:  Resistance in Ohm
 @ [C]:  Capacitance in F
 @
-@ Author:
 @ Michael Grubmüller, michael.grubmueller@gmail.com
-@ 2022-10-13
+@ 2023-05-12
 
-00 { 31-Byte Prgm }
-01▸LBL "RC"
+00 { 34-Byte Prgm }
+01▸LBL "RC-LP"
 02 MVAR "fc"
 03 MVAR "R"
 04 MVAR "C"

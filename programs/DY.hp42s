@@ -1,0 +1,81 @@
+@ Delta-wye conversion
+@
+@ This program is based on the "Delta-Wye Conversion" program in:
+@ Electrical Engineering: Step-by-Step Solutions for Your HP-42S Calculator
+@
+@ Major differences to the original program are: 
+@ - Printer flags are not handled
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2023-05-15
+
+00 { 213-Byte Prgm }
+01▸LBL "DY"
+02 MVAR "ZY1"
+03 MVAR "ZY2"
+04 MVAR "ZY3"
+05 MVAR "Z12"
+06 MVAR "Z23"
+07 MVAR "Z13"
+08▸LBL A
+09 VARMENU "DY"
+10 STOP
+11 ATOX
+12 XTOA
+13 ATOX
+14 XTOA
+15 ATOX
+16 XTOA
+17 +
+18 95
+19 -
+20 XEQ IND ST X
+21 SF 25
+22 ÷
+23 ASTO ST L
+24 FC?C 25
+25 XEQ 03
+26 STO IND ST L
+27 FC? 50
+28 VIEW IND ST L
+29 GTO A
+30▸LBL 43
+31 RCL "Z12"
+32 RCL× "Z13"
+33 GTO 01
+34▸LBL 44
+35 RCL "Z12"
+36 GTO 00
+37▸LBL 45
+38 RCL "Z13"
+39▸LBL 00
+40 RCL× "Z23"
+41▸LBL 01
+42 RCL "Z12"
+43 RCL+ "Z13"
+44 RCL+ "Z23"
+45 RTN
+46▸LBL 04
+47 RCL "ZY3"
+48 GTO 02
+49▸LBL 05
+50 RCL "ZY2"
+51 GTO 02
+52▸LBL 06
+53 RCL "ZY1"
+54▸LBL 02
+55 RCL "ZY1"
+56 RCL× "ZY2"
+57 LASTX
+58 RCL "ZY3"
+59 +
+60 RCL "ZY2"
+61 RCL× "ZY3"
+62 +
+63 X<>Y
+64 RTN
+65▸LBL 03
+66 ├"=Open Circuit"
+67 9.99ᴇ499
+68 AVIEW
+69 END

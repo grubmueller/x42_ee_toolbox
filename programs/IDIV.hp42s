@@ -1,0 +1,73 @@
+@ Current divider
+@
+@ This program is based on the "Current Divsion" program in:
+@ Electrical Engineering: Step-by-Step Solutions for Your HP-42S Calculator
+@
+@ Major differences to the original program are: 
+@ - Printer flags are not handled
+@ - Terminal voltage is labeled "I" instead "I.T"
+@
+@ The program imitates the solver behavior, but doesn't use it.
+@ Thus all values can be complex numbers.
+@
+@ I2 = I*Z1/(Z1+Z2)
+@
+@ [I]:  Input current in A
+@ [I2]: Sub current in A
+@ [Z1]: Impedance 1 in Ohm
+@ [Z2]: Impedance 2 in Ohm
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2023-05-15
+
+00 { 137-Byte Prgm }
+01▸LBL "I÷"
+02 MVAR "I"
+03 MVAR "I2"
+04 MVAR "Z1"
+05 MVAR "Z2"
+06▸LBL 00
+07 CLA
+08 VARMENU "I÷"
+09 STOP
+10 ATOX
+11 ATOX
+12 -
+13 XEQ IND ST X
+14 GTO 00
+15▸LBL 23
+16 RCL "Z1"
+17 RCL× "I"
+18 RCL "Z2"
+19 LASTX
+20 +
+21 ÷
+22 STO "I2"
+23 VIEW "I2"
+24 RTN
+25▸LBL 73
+26 RCL "Z2"
+27 RCL+ "Z1"
+28 RCL× "I2"
+29 RCL÷ "Z1"
+30 STO "I"
+31 VIEW "I"
+32 RTN
+33▸LBL 40
+34 RCL "Z1"
+35 RCL× "I"
+36 RCL÷ "I2"
+37 RCL- "Z1"
+38 STO "Z2"
+39 VIEW "Z2"
+40 RTN
+41▸LBL 41
+42 RCL "I2"
+43 RCL× "Z2"
+44 RCL "I"
+45 LASTX
+46 -
+47 ÷
+48 STO "Z1"
+49 VIEW "Z1"
+50 END

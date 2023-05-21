@@ -1,0 +1,36 @@
+@ Impedance of capacitance or inductance
+@
+@ This program is based on the "Impedance of an Element" program in:
+@ Electrical Engineering: Step-by-Step Solutions for Your HP-42S Calculator
+@
+@ Major difference to the original program is the use of the frequency "f" 
+@ instead the angular frequency "w".
+@
+@ Calculates the impedance of an inductance or capacitance given in the x stack.
+@ The frequency must be stored before in "f".
+@ The complex setting (RECT or POLAR) is restored after execution.
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2023-05-09
+
+00 { 46-Byte Prgm }
+01▸LBL "C→Z"
+02 XEQ "L→Z"
+03 1/X
+04 RTN
+05▸LBL "L→Z"
+06 2
+07 ×
+08 PI
+09 ×
+10 RCL× "f"
+11 0
+12 X<>Y
+13 CF 00
+14 FS? 73
+15 SF 00
+16 RECT
+17 COMPLEX
+18 FS? 00
+19 POLAR
+20 END

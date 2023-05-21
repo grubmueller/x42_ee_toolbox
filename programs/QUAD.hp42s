@@ -4,7 +4,6 @@
 @ y, x stack. The resulting two roots are returned on x and y stack. Also works
 @ with complex solutions.
 @
-@ Author:
 @ Michael Grubmüller, michael.grubmueller@gmail.com
 @ 2022-05-09
 @

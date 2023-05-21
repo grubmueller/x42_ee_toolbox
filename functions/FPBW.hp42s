@@ -10,7 +10,6 @@
 @ [SR]:     Amplifier slew rate in V/s (or V/us)
 @ [Vp]:     Amplifier output voltage (peak) in V
 @
-@ Author:
 @ Michael Grubmüller, michael.grubmueller@gmail.com
 @ 2022-10-13
 

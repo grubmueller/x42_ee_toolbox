@@ -8,12 +8,11 @@
 @ [L]:  Inductance in H
 @ [C]:  Capacitance in F
 @
-@ Author:
 @ Michael Grubmüller, michael.grubmueller@gmail.com
 @ 2022-10-13
 
-00 { 33-Byte Prgm }
-01▸LBL "LC"
+00 { 36-Byte Prgm }
+01▸LBL "LC-RC"
 02 MVAR "f0"
 03 MVAR "L"
 04 MVAR "C"

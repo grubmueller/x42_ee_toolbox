@@ -7,14 +7,13 @@
 @
 @ For T < 0 : R = R0 * (1+(A*T)+(B*T**2)+((C*T**3)*(T-100)))
 @ For T >= 0 : R = R0 * (1+(A*T)+(B*T**2))
-@ A:    const 3.9083ᴇ-3 1/°C
-@ B:    const -5.775ᴇ-7 1/°C**2
-@ C:    const -4.183ᴇ-12 1/°C**4
+@ A:    const 3.9083E-3 1/°C
+@ B:    const -5.775E-7 1/°C**2
+@ C:    const -4.183E-12 1/°C**4
 @ [R]:  RTD resistance in Ohm
 @ [R0]: Resistance at 0°C in Ohm
 @ [T]:  Temperature in °C
 @
-@ Author:
 @ Michael Grubmüller, michael.grubmueller@gmail.com
 @ 2022-10-13
 
@@ -28,18 +27,18 @@
 07 100
 08 100
 09 -
-10 -4,183ᴇ-12
+10 -4.183ᴇ-12
 11 RCL "T"
 12 3
 13 Y↑X
 14 ×
 15 ×
-16 -5,775ᴇ-7
+16 -5.775ᴇ-7
 17 RCL "T"
 18 X↑2
 19 ×
 20 +
-21 3,9083ᴇ-3
+21 3.9083ᴇ-3
 22 RCL× "T"
 23 +
 24 1

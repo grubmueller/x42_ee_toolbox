@@ -6,39 +6,49 @@ This is my collection of x42 ([HP-42S](https://www.hpmuseum.org/hp42s.htm), [Swi
 
 ## Program documentation
 
-More detailed information and usage of the programs can be found in the program files itself.
+Information on program usage is written in the according program files.
 
 ### functions (use with `SOLVER`)
+
 - `FPBW`: Full power bandwidth of an op-amp
-- `LC`: Resonant frequency of an LC resonant cirucit
-- `RC`: Cut-off frequency of a passive RC lowp ass filter
+- `LC-RC`: Resonant frequency of an LC resonant cirucit
+- `RC-LP`: Cut-off frequency of a passive RC low pass filter
 - `RPAR`: Parallel resistance of two resistors
 - `RTD`: Resistance-temperature relation of Platinum type RTDs (e.g. Pt100)
-- `VDIV`: Voltage divider
 - `VREG`: Voltage regulator (e.g. LM317)
-- `XC`: Reacatance of capacitor
-- `XL`: Reacatance of capacitor
+- `XC`: Reactance of capacitor
+- `XL`: Reactance of inductor
 
 ### programs (use with `XEQ`)
 
-- `→ZC`: Convert capacitance to impedance
-- `→ZL`: Convert inductance to impedance
+- `C→Z`, `L→Z`: Impedance of an element, [HP42-EE]
 - `CONJ`: Complex conjugate of x stack
-- `ESER`: E series values for electronic components
+- `DY`: Delta-wye conversion, [HP42-EE]
+- `I÷`: Current divider, [HP42-EE]
 - `QUAD`: Roots of quadratic equation
+- `RFIT`, `RVIEW`, `ESER`: Find a combination of two standard resistors for a desired value
+    - <u>*Timing tests with fitting 1234 Ohm with E12 series, solving for 10 results:*</u>
+    - *Result without delay on Free42 computer app*
+    - *8 s on USB powered DM42*
+    - *21 s on battery powered DM42*
+- `V÷`: Voltage divider, [HP42-EE]
 - `X||Y`: Parallel impedance of x and y stack
+
+### non-engineering
+
+- `TVM`: Time value of money (solver function), [HP42-OM]
 
 ## Toolchain
 
 All programs are human readable text files with UTF8 encoding, so any editor should work fine to read the code. Files with the ending `.hp42s` are limited to the original HP-42S commands, while files ending with `.free42` may contain some commands only available on Free42. 
 
-To get the program onto the platform you want, you can of course transcode it (if you are fortunate enough to have an HP-42s, this is also the only option). To get the programs onto a SissMicros DM42, I recommend using the desktop version of [Free42](https://thomasokken.com/free42/) to encode the programs. Simply put the application into program mode and copy and paste the program into the application. Then a raw or state file can be exported for further use on a DM42.
+To get the program onto the platform you want, you can of course transcode it (if you are fortunate enough to have an HP-42S, this is also the only option). To get the programs onto a SissMicros DM42, I recommend using the desktop version of [Free42](https://thomasokken.com/free42/) to encode the programs. Simply put the application into program mode and copy and paste the program into the application. Then a raw or state file can be exported for further use on a DM42.
 
 ## Additional literature
 
-Scans of great HP calculator related literature can be found on [hpcals.org](https://literature.hpcalc.org).
+Scans of great HP calculator related literature can be found on [hpcalc.org](https://literature.hpcalc.org).
 Direkt link to some HP-42S related files:
-- [HP-42S Quick Reference Guide](https://literature.hpcalc.org/community/hp42s-qrg-en.pdf)
-- [HP-42S Owner's Manual](https://literature.hpcalc.org/community/hp42s-om-en.pdf)
-- [HP-42S Programming Examples and Techniques](https://literature.hpcalc.org/community/hp42s-prog-en.pdf)
-- [HP-42S Electrical Engineering](https://literature.hpcalc.org/community/hp42s-elec-en.pdf)
+- [HP42-QR]: [HP-42S Quick Reference Guide](https://literature.hpcalc.org/community/hp42s-qrg-en.pdf)
+- [HP42-OM]: [HP-42S Owner's Manual](https://literature.hpcalc.org/community/hp42s-om-en.pdf)
+- [HP42-PE]: [HP-42S Programming Examples and Techniques](https://literature.hpcalc.org/community/hp42s-prog-en.pdf)
+- [HP42-EE]: [HP-42S Electrical Engineering](https://literature.hpcalc.org/community/hp42s-elec-en.pdf)

@@ -1,0 +1,73 @@
+@ Voltage divider
+@
+@ This program is based on the "Voltage Divsion" program in:
+@ Electrical Engineering: Step-by-Step Solutions for Your HP-42S Calculator
+@
+@ Major differences to the original program are: 
+@ - Printer flags are not handled
+@ - Terminal voltage is labeled "V" instead "VT"
+@
+@ The program imitates the solver behavior, but doesn't use it.
+@ Thus all values can be complex numbers.
+@
+@ V2 = V*Z2/(Z1+Z2)
+@
+@ [V]:  Input voltage in V
+@ [V2]: Output voltage in V
+@ [Z1]: Top impedance in Ohm
+@ [Z2]: Bottom (output) impedance in Ohm
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2023-05-12
+
+00 { 137-Byte Prgm }
+01▸LBL "V÷"
+02 MVAR "V"
+03 MVAR "V2"
+04 MVAR "Z1"
+05 MVAR "Z2"
+06▸LBL 00
+07 CLA
+08 VARMENU "V÷"
+09 STOP
+10 ATOX
+11 ATOX
+12 -
+13 XEQ IND ST X
+14 GTO 00
+15▸LBL 36
+16 RCL "Z2"
+17 RCL× "V"
+18 RCL "Z1"
+19 LASTX
+20 +
+21 ÷
+22 STO "V2"
+23 VIEW "V2"
+24 RTN
+25▸LBL 86
+26 RCL "Z1"
+27 RCL+ "Z2"
+28 RCL× "V2"
+29 RCL÷ "Z2"
+30 STO "V"
+31 VIEW "V"
+32 RTN
+33▸LBL 40
+34 RCL "V2"
+35 RCL× "Z1"
+36 RCL "V"
+37 LASTX
+38 -
+39 ÷
+40 STO "Z2"
+41 VIEW "Z2"
+42 RTN
+43▸LBL 41
+44 RCL "Z2"
+45 RCL× "V"
+46 RCL÷ "V2"
+47 RCL÷ "Z2"
+48 STO "Z1"
+49 VIEW "Z1"
+50 END

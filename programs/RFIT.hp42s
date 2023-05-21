@@ -1,0 +1,421 @@
+
+@ RFIT: Find two standard resistors to get (close to) a desired non-standard
+@ resistance value
+@
+@ Program usage:
+@ 1: Type in the desired resistance value into the x stack
+@ 2: [XEQ] -> RFIT
+@ 3: You will be asked for the E series you want to use;
+@    type in 3, 6, 12, 24 or 48 and proceed with [R/S]
+@ 4: After some computation time the results will be shown;
+@    scroll through the results with [UP] and [DOWN];
+@    exit the program with [EXIT]
+@
+@ Following subroutines have global labels and can also be run independent of
+@ the RFIT program:
+@ - RVIEW: (Re)view the results
+@ - ESER: Calculate E series matrix (E number must be in x stack, result is in
+@         ESER matrix).
+@
+@ The program is tested on Free42 and also on DM42.
+@ I am not shure if speed and memory will be sufficient on an HP-42S.
+@
+@ Similar online calculatory are:
+@ https://www.qsl.net/in3otd/parallr.html
+@ http://www.veith.net/e12calc.htm
+@ https://jansson.us/resistors.html
+@
+@ For calculation of E series see Wikipedia article:
+@ https://en.wikipedia.org/wiki/E_series_of_preferred_numbers
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2023-05-17
+
+00 { 642-Byte Prgm }
+01▸LBL "RFIT"
+
+@ Take desired resistance from stack
+02 STO "R"
+
+@ Ask for E series an calculate values
+03 INPUT "E"
+04 XEQ "ESER"
+
+@ Settings
+05 1
+06 STO 01 @ Initial multiplicator (0.1, 1, 10,...)
+07 6
+08 STO 02 @ Number of decades (1, 2, 3,...)
+09 10
+10 STO 03 @ Number of results
+
+@ Init
+11 9.99ᴇ499
+12 STO 09 @ Current worst case rel. error in RFIT
+13 RCL 03
+14 5
+15 DIM "RFIT"
+16 0
+17 STO× "RFIT"
+18 RCL 09
+19 STO+ "RFIT"
+
+@ INFO - temporary result registers:
+@ 04  Circuit configuration
+@     0: single resistor
+@     1: series circuit
+@     2: parallel circuit
+@ 05  R1
+@ 06  R2
+@ 07  R
+@ 08  Relative error
+@ 09  Current worst case rel. error in RFIT
+
+@ Outer loop (R1) init
+20 RCL "E"
+21 RCL 02
+22 ×
+23 1000
+24 ÷
+25 0.00001
+26 +
+27 1
+28 +
+29 STO 11
+
+@ Outer loop (R1) body
+30▸LBL 11
+
+@ Pick resistor R1 from pool
+31 RCL 11
+32 XEQ 20
+33 STO 05
+
+@ Single resistor solution
+34 0
+35 STO 04
+36 STO 06
+37 R↓
+38 STO 07
+39 RCL "R"
+40 X<>Y
+41 %CH
+42 STO 08
+43 ABS
+44 RCL 09
+45 ABS
+46 X>Y?
+47 XEQ 30
+
+@ Inner loop (R2) init
+48 RCL "E"
+49 RCL 02
+50 ×
+51 1000
+52 ÷
+53 0.00001
+54 +
+55 RCL 11
+56 IP
+57 +
+58 STO 12
+
+@ Inner loop (R2) body
+59▸LBL 12
+
+@ Pick resistor R2 from pool
+60 RCL 12
+61 XEQ 20
+62 STO 06
+
+@ Series circuit solution
+63 1
+64 STO 04
+65 RCL 05
+66 RCL+ 06
+67 STO 07
+68 RCL "R"
+69 X<>Y
+70 %CH
+71 STO 08
+72 ABS
+73 RCL 09
+74 ABS
+75 X>Y?
+76 XEQ 30
+
+@ Parallel circuit solution
+77 2
+78 STO 04
+79 RCL 05
+80 RCL 06
+81 1/X
+82 X<>Y
+83 1/X
+84 +
+85 1/X
+86 STO 07
+87 RCL "R"
+88 X<>Y
+89 %CH
+90 STO 08
+91 ABS
+92 RCL 09
+93 ABS
+94 X>Y?
+95 XEQ 30
+
+@ Inner loop (R2) control
+96 ISG 12
+97 GTO 12
+
+@ Outer (R1) loop control
+98 ISG 11
+99 GTO 11
+
+@ View results
+100 XEQ "RVIEW"
+
+@ ------------------------------------------------------------------------------
+@ Pick resistor out of pool
+@
+101▸LBL 20
+102 IP
+103 1
+104 -
+105 ENTER
+106 ENTER
+107 RCL "E"
+108 MOD
+109 1
+110 +
+111 1
+112 INDEX "ESER"
+113 STOIJ
+114 R↓
+115 R↓
+116 RCLEL
+117 X<>Y
+118 RCL÷ "E"
+119 IP
+120 10
+121 X<>Y
+122 Y↑X
+123 RCL× 01
+124 ×
+125 RTN
+
+@ ------------------------------------------------------------------------------
+@ Insert calculation into result matrix
+@
+126▸LBL 30
+127 INDEX "RFIT"
+
+@ Override last element of solution matrix
+128 RCL 03
+129 1
+130 STOIJ
+131 RCL 04
+132 STOEL
+133 J+
+134 RCL 05
+135 STOEL
+136 J+
+137 RCL 06
+138 STOEL
+139 J+
+140 RCL 07
+141 STOEL
+142 J+
+143 RCL 08
+144 STOEL
+
+@ Sort solution matrix
+145▸LBL 31
+146 RCLIJ
+147 R↓
+148 1
+149 -
+150 X=0?
+151 GTO 32
+152 I-
+153 RCLEL
+154 ABS
+155 RCL 08
+156 ABS
+157 X>Y?
+158 GTO 32
+159 RCLIJ
+160 R↓
+161 ENTER
+162 ENTER
+163 1
+164 +
+165 R<>R
+166 GTO 31
+
+@ End of routine, save last elements error
+167▸LBL 32
+168 RCL 03
+169 5
+170 STOIJ
+171 RCLEL
+172 STO 09
+173 RTN
+
+@ ------------------------------------------------------------------------------
+@ Show results
+@
+174▸LBL "RVIEW"
+175 INDEX "RFIT"
+176 CLMENU
+177 KEY 7 XEQ 42
+178 KEY 8 XEQ 43
+179 KEY 9 GTO e
+180 MENU
+181▸LBL 41
+182 XEQ 44
+183 PROMPT
+184 GTO 41
+
+@ Key up - previous result
+185▸LBL 42
+186 I-
+187 RCLIJ
+188 CLX
+189 1
+190 STOIJ
+191 RTN
+
+@ Key down - next result
+192▸LBL 43
+193 I+
+194 RCLIJ
+195 CLX
+196 1
+197 STOIJ
+198 RTN
+
+@ Display result
+199▸LBL 44
+200 CLA
+201 RCLIJ
+202 R↓
+203 AIP
+204 ├": "
+205 J+
+206 RCLEL
+207 ENG 02
+208 ARCL ST X
+209 J-
+210 RCLEL
+211 1
+212 X=Y?
+213 ├" + "
+214 CLX
+215 2
+216 X=Y?
+217 ├" || "
+218 J+
+219 J+
+220 RCLEL
+221 X≠0?
+222 ARCL ST X
+223 ├"[LF]"
+224 J+
+225 RCLEL
+226 ENG 05
+227 ARCL ST X
+228 J+
+229 RCLEL
+230 FIX 03
+231 ├" ("
+232 ARCL ST X
+233 ├"%)"
+234 RCLIJ
+235 CLX
+236 1
+237 STOIJ
+238 RTN
+
+@ ------------------------------------------------------------------------------
+@ Calculate E series values
+@
+239▸LBL "ESER"
+240 STO "E"
+241 1
+242 DIM "ESER"
+243 INDEX "ESER"
+
+@ Set decimal numbers for rounding
+244 FIX 01
+245 24
+246 RCL "E"
+247 X>Y?
+248 FIX 02
+
+@ Loop init
+249 1
+250 -
+251 1000
+252 ÷
+253 0.00001
+254 +
+255 STO 00
+
+@ Loop body
+256▸LBL 51
+257 10
+258 RCL 00
+259 IP
+260 RCL "E"
+261 ÷
+262 Y↑X
+263 RND
+264 2.6
+265 X<>Y
+266 X=Y?
+267 2.7
+268 2.9
+269 X<>Y
+270 X=Y?
+271 3.0
+272 3.2
+273 X<>Y
+274 X=Y?
+275 3.3
+276 3.5
+277 X<>Y
+278 X=Y?
+279 3.6
+280 3.8
+281 X<>Y
+282 X=Y?
+283 3.9
+284 4.2
+285 X<>Y
+286 X=Y?
+287 4.3
+288 4.6
+289 X<>Y
+290 X=Y?
+291 4.7
+292 8.3
+293 X<>Y
+294 X=Y?
+295 8.2
+296 STOEL
+297 I+
+
+@ Loop control
+298 ISG 00
+299 GTO 51
+
+300 RTN
+
+@ ------------------------------------------------------------------------------
+@ End of program
+@
+301▸LBL e
+302 EXITALL
+303 END

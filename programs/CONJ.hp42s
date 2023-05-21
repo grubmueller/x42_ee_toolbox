@@ -2,16 +2,12 @@
 @
 @ Computes the conjugate complex of the current x stack.
 @
-@ Author:
 @ Michael Grubmüller, michael.grubmueller@gmail.com
 @ 2023-05-10
 
-00 { 14-Byte Prgm }
+00 { 13-Byte Prgm }
 01▸LBL "CONJ"
-02 ENTER
-03 1/X
-04 X<>Y
-05 ABS
-06 X↑2
-07 ×
-08 END
+02 COMPLEX
+03 +/-
+04 COMPLEX
+05 END

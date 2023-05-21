@@ -3,7 +3,6 @@
 @ Calculates the parallel impedance of two input impedances given in the x and
 @ y stack.
 @
-@ Author:
 @ Michael Grubmüller, michael.grubmueller@gmail.com
 @ 2023-05-09
 
