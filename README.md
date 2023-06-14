@@ -37,6 +37,7 @@ Information on program usage is written in the according program files.
 ### non-engineering
 
 - `TVM`: Time value of money (solver function), [HP42-OM]
+- `TVM2`: Time value of money, [HP42-PE]
 
 ## Toolchain
 
