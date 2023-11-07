@@ -10,6 +10,7 @@ Information on program usage is written in the according program files.
 
 ### functions (use with `SOLVER`)
 
+- `CCOAX`: Coaxial/zylinder capacitor
 - `FPBW`: Full power bandwidth of an op-amp
 - `LC-RC`: Resonant frequency of an LC resonant cirucit
 - `RC-LP`: Cut-off frequency of a passive RC low pass filter
@@ -25,6 +26,7 @@ Information on program usage is written in the according program files.
 - `CONJ`: Complex conjugate of x stack
 - `DY`: Delta-wye conversion, [HP42-EE]
 - `I÷`: Current divider, [HP42-EE]
+- `NIST`: Physical constants
 - `QUAD`: Roots of quadratic equation
 - `RFIT`, `RVIEW`, `ESER`: Find a combination of two standard resistors for a desired value
     - <u>*Timing tests with fitting 1234 Ohm with E12 series, solving for 10 results:*</u>
