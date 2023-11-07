@@ -31,7 +31,7 @@
 @ Michael Grubmüller, michael.grubmueller@gmail.com
 @ 2023-05-17
 
-00 { 642-Byte Prgm }
+00 { 647-Byte Prgm }
 01▸LBL "RFIT"
 
 @ Take desired resistance from stack
@@ -81,13 +81,13 @@
 26 +
 27 1
 28 +
-29 STO 11
+29 STO 31
 
 @ Outer loop (R1) body
 30▸LBL 11
 
 @ Pick resistor R1 from pool
-31 RCL 11
+31 RCL 31
 32 XEQ 20
 33 STO 05
 
@@ -115,16 +115,16 @@
 52 ÷
 53 0.00001
 54 +
-55 RCL 11
+55 RCL 31
 56 IP
 57 +
-58 STO 12
+58 STO 32
 
 @ Inner loop (R2) body
 59▸LBL 12
 
 @ Pick resistor R2 from pool
-60 RCL 12
+60 RCL 32
 61 XEQ 20
 62 STO 06
 
@@ -166,11 +166,11 @@
 95 XEQ 30
 
 @ Inner loop (R2) control
-96 ISG 12
+96 ISG 32
 97 GTO 12
 
 @ Outer (R1) loop control
-98 ISG 11
+98 ISG 31
 99 GTO 11
 
 @ View results
