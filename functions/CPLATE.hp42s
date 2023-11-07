@@ -12,8 +12,8 @@
 @ Michael Grubmüller, michael.grubmueller@gmail.com
 @ 2023-11-07
 
-00 { 52-Byte Prgm }
-01▸LBL "Ccoax"
+00 { 53-Byte Prgm }
+01▸LBL "Cplate"
 02 MVAR "C"
 03 MVAR "er"
 04 MVAR "A"
