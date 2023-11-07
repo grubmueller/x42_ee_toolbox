@@ -11,6 +11,7 @@ Information on program usage is written in the according program files.
 ### functions (use with `SOLVER`)
 
 - `CCOAX`: Coaxial/zylinder capacitor
+- `CPLATE`: Plate capacitor
 - `FPBW`: Full power bandwidth of an op-amp
 - `LC-RC`: Resonant frequency of an LC resonant cirucit
 - `RC-LP`: Cut-off frequency of a passive RC low pass filter
