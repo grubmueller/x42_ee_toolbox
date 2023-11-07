@@ -8,12 +8,12 @@
 @ Michael Grubmüller, michael.grubmueller@gmail.com
 @ 2023-11-07
 
-00 { 66-Byte Prgm }
+00 { 64-Byte Prgm }
 01▸LBL "NIST"
 02 299792458
 03 STO "c"
 04 1.25663706212ᴇ-6
 05 STO "mu0"
 06 8.8541878128ᴇ-12
-07 STO "eps0"
+07 STO "e0"
 08 END
