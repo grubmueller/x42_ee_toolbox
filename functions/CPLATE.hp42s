@@ -1,0 +1,26 @@
+@ Plate capacitor
+@
+@ Solver program for calculating the capcitance of a plate capacitor.
+@
+@ C = e0*er*A/d
+@
+@ [C]: Capacitance in F
+@ [er]: Rel. permittivity
+@ [A]: Plate surface in m2
+@ [d]: Plate distance in m
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2023-11-07
+
+00 { 52-Byte Prgm }
+01▸LBL "Ccoax"
+02 MVAR "C"
+03 MVAR "er"
+04 MVAR "A"
+05 MVAR "d"
+06 8.8541878128ᴇ-12
+07 RCL× "er"
+08 RCL× "A"
+09 RCL÷ "d"
+10 RCL- "C"
+11 END
