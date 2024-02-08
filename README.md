@@ -13,8 +13,8 @@ Information on program usage is written in the according program files.
 - `CCOAX`: Coaxial/zylinder capacitor
 - `CPLATE`: Plate capacitor
 - `FPBW`: Full power bandwidth of an op-amp
-- `LC-RC`: Resonant frequency of an LC resonant cirucit
-- `RC-LP`: Cut-off frequency of a passive RC low pass filter
+- `LC`: Resonant frequency of an LC resonant cirucit
+- `RC`: Cut-off frequency of a passive RC low pass filter
 - `RPAR`: Parallel resistance of two resistors
 - `RTD`: Resistance-temperature relation of Platinum type RTDs (e.g. Pt100)
 - `VREG`: Voltage regulator (e.g. LM317)
