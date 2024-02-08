@@ -17,10 +17,6 @@
 @ - ESER: Calculate E series matrix (E number must be in x stack, result is in
 @         ESER matrix).
 @
-@ The program uses register R31 and R32 for temporary data storage.
-@ Thus the standard register siez of 25 must be changed to at least 33 with
-@ [SIZE] in [MODES] menu.
-@
 @ The program is tested on Free42 PC software and also on DM42.
 @ I am not shure if speed and memory will be sufficient on an HP-42S.
 @
@@ -33,9 +29,9 @@
 @ https://en.wikipedia.org/wiki/E_series_of_preferred_numbers
 @
 @ Michael Grubmüller, michael.grubmueller@gmail.com
-@ 2023-11-07
+@ 2024-02-08
 
-00 { 647-Byte Prgm }
+00 { 642-Byte Prgm }
 01▸LBL "RFIT"
 
 @ Take desired resistance from stack
@@ -85,13 +81,13 @@
 26 +
 27 1
 28 +
-29 STO 31
+29 STO 11
 
 @ Outer loop (R1) body
 30▸LBL 11
 
 @ Pick resistor R1 from pool
-31 RCL 31
+31 RCL 11
 32 XEQ 20
 33 STO 05
 
@@ -119,16 +115,16 @@
 52 ÷
 53 0.00001
 54 +
-55 RCL 31
+55 RCL 11
 56 IP
 57 +
-58 STO 32
+58 STO 12
 
 @ Inner loop (R2) body
 59▸LBL 12
 
 @ Pick resistor R2 from pool
-60 RCL 32
+60 RCL 12
 61 XEQ 20
 62 STO 06
 
@@ -170,11 +166,11 @@
 95 XEQ 30
 
 @ Inner loop (R2) control
-96 ISG 32
+96 ISG 12
 97 GTO 12
 
 @ Outer (R1) loop control
-98 ISG 31
+98 ISG 11
 99 GTO 11
 
 @ View results
