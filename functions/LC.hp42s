@@ -9,10 +9,10 @@
 @ [C]:  Capacitance in F
 @
 @ Michael Grubmüller, michael.grubmueller@gmail.com
-@ 2022-10-13
+@ 2024-02-08
 
-00 { 36-Byte Prgm }
-01▸LBL "LC-RC"
+00 { 33-Byte Prgm }
+01▸LBL "LC"
 02 MVAR "f0"
 03 MVAR "L"
 04 MVAR "C"
