@@ -2,23 +2,23 @@
 @
 @ Solver program for calculating the capcitance of a cylinder capacitor.
 @
-@ C = 2*pi*e0*er*l/ln(r2/r1)
+@ C = 2*pi*e0*er*l/ln(do/di)
 @
 @ [C]: Capacitance in F
 @ [er]: Rel. permittivity
-@ [a]: Inner radius (or diameter) in m
-@ [b]: Outer radius (or diameter) in m
+@ [di]: Inner diameter (or radius) in m
+@ [do]: Outer diameter (or radius) in m
 @ [l]: Length in m
 @
 @ Michael Grubmüller, michael.grubmueller@gmail.com
-@ 2023-11-07
+@ 2024-02-08
 
-00 { 65-Byte Prgm }
+00 { 69-Byte Prgm }
 01▸LBL "Ccoax"
 02 MVAR "C"
 03 MVAR "er"
-04 MVAR "a"
-05 MVAR "b"
+04 MVAR "di"
+05 MVAR "do"
 06 MVAR "l"
 07 2
 08 PI
@@ -27,8 +27,8 @@
 11 ×
 12 RCL× "er"
 13 RCL× "l"
-14 RCL "b"
-15 RCL÷ "a"
+14 RCL "do"
+15 RCL÷ "di"
 16 LN
 17 ÷
 18 RCL- "C"
