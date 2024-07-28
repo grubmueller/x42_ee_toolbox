@@ -67,7 +67,7 @@
 44 RCL "Z2"
 45 RCL× "V"
 46 RCL÷ "V2"
-47 RCL÷ "Z2"
+47 RCL- "Z2"
 48 STO "Z1"
 49 VIEW "Z1"
 50 END
