@@ -51,7 +51,7 @@ There are different ways to get the programs onto your platform/device:
 - To use the programs on the desktop version of [Free42](https://thomasokken.com/free42/) you can simply put the calculator application into programming mode and copy and paste the program code into the application. You may further export raw or state files to export them for the use on a Free42 mobile app or a DM42.
 - Directly generating raw files is supported by the `txt2raw` program, provided on the Free42 homepage. This repository contains a `make_raw.py` python file that batch converts all source files to a raw file.
 
-## Additional literature
+## Links and resources
 
 Scans of great HP calculator related literature can be found on [hpcalc.org](https://literature.hpcalc.org).
 Direkt link to some HP-42S related files:
@@ -59,3 +59,4 @@ Direkt link to some HP-42S related files:
 - [HP42-OM]: [HP-42S Owner's Manual](https://literature.hpcalc.org/community/hp42s-om-en.pdf)
 - [HP42-PE]: [HP-42S Programming Examples and Techniques](https://literature.hpcalc.org/community/hp42s-prog-en.pdf)
 - [HP42-EE]: [HP-42S Electrical Engineering](https://literature.hpcalc.org/community/hp42s-elec-en.pdf)
+- [Werner-Convert42]: [Forum post '(42) Conversions' on hpmuseum.org of Werner](https://www.hpmuseum.org/forum/thread-10141.html)
