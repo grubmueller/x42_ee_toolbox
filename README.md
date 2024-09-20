@@ -46,7 +46,10 @@ Information on program usage is written in the according program files.
 
 All programs are human readable text files with UTF8 encoding, so any editor should work fine to read the code. Files with the ending `.hp42s` are limited to the original HP-42S commands, while files ending with `.free42` may contain some commands only available on Free42. 
 
-To get the program onto the platform you want, you can of course transcode it (if you are fortunate enough to have an HP-42S, this is also the only option). To get the programs onto a SissMicros DM42, I recommend using the desktop version of [Free42](https://thomasokken.com/free42/) to encode the programs. Simply put the application into program mode and copy and paste the program into the application. Then a raw or state file can be exported for further use on a DM42.
+There are different ways to get the programs onto your platform/device:
+- Of course you can simply transcode the files on your device (if you are fortunate enough to have an HP-42S, this is also the only option). 
+- To use the programs on the desktop version of [Free42](https://thomasokken.com/free42/) you can simply put the calculator application into programming mode and copy and paste the program code into the application. You may further export raw or state files to export them for the use on a Free42 mobile app or a DM42.
+- Directly generating raw files is supported by the `txt2raw` program, provided on the Free42 homepage. This repository contains a `make_raw.py` python file that batch converts all source files to a raw file.
 
 ## Additional literature
 
