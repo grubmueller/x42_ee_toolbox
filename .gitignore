@@ -1,3 +1,5 @@
 *.raw
+*.exe
+
+/raw
 /tmp
-/states
