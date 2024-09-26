@@ -1,0 +1,33 @@
+@ AWG/metric conversion
+@
+@ Solver program for converting between AWG and wire cross section in mm2.
+@
+@ d = 0.127*92**((36-AWG)/39)
+@ with d = sqrt(4*A/PI)
+@
+@ [AWG]: American wire gauge
+@ [A]: Wire cross section mm2
+@
+@ Michael Grubmüller, michael.grubmueller@gmail.com
+@ 2024-09-26
+
+00 { 48-Byte Prgm }
+01▸LBL "AWG"
+02 MVAR "AWG"
+03 MVAR "A"
+04 92
+05 ENTER
+06 36
+07 RCL- "AWG"
+08 39
+09 ÷
+10 Y↑X
+11 0.127
+12 ×
+13 4
+14 RCL× "A"
+15 PI
+16 ÷
+17 SQRT
+18 -
+19 END
