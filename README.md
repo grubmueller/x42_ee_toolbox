@@ -53,8 +53,6 @@ There are different ways to get the programs onto your platform/device:
 
 ## Links and resources
 
-Scans of great HP calculator related literature can be found on [hpcalc.org](https://literature.hpcalc.org).
-Direkt link to some HP-42S related files:
 - [HP42-QR]: [HP-42S Quick Reference Guide](https://literature.hpcalc.org/community/hp42s-qrg-en.pdf)
 - [HP42-OM]: [HP-42S Owner's Manual](https://literature.hpcalc.org/community/hp42s-om-en.pdf)
 - [HP42-PE]: [HP-42S Programming Examples and Techniques](https://literature.hpcalc.org/community/hp42s-prog-en.pdf)
