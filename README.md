@@ -37,6 +37,14 @@ Information on program usage is written in the according program files.
 - `V÷`: Voltage divider, [HP42-EE]
 - `X||Y`: Parallel impedance of x and y stack
 
+### convert
+
+Unit conversion program. The program was released by Werner on the hpmuseum.org forum [Werner-Convert42]; `.txt` files are the original files from the froum, `.hp42s` files may contain changes.
+
+- `CONV`: Main conversion program
+- `DMENU`: Helper program to build a menu based on matrices
+- `CONV`: Helper program to create the menu matrices; this program must be executed once before using the the conversion program
+
 ### non-engineering
 
 - `TVM`: Time value of money (solver function), [HP42-OM]
