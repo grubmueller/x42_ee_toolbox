@@ -1,5 +1,3 @@
 *.raw
-*.exe
-
-/raw
-/tmp
+*.zip
+/rawconv-mac
