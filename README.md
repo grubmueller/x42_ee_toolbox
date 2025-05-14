@@ -43,7 +43,7 @@ Unit conversion program. The program was released by Werner on the hpmuseum.org 
 
 - `CONV`: Main conversion program
 - `DMENU`: Helper program to build a menu based on matrices
-- `CONV`: Helper program to create the menu matrices; this program must be executed once before using the the conversion program
+- `CRMATS`: Helper program to create the menu matrices; this program must be executed once before using the the conversion program
 
 ### non-engineering
 
